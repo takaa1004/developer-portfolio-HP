@@ -8,6 +8,7 @@ import {
   families,
   isCampaignActive,
   price,
+  process,
   reasons,
   steps,
   telHref,
@@ -22,6 +23,7 @@ const yen = (n) => n.toLocaleString("ja-JP");
 const nav = [
   { href: "#about", label: "配管の汚れ" },
   { href: "#reasons", label: "選ばれる理由" },
+  { href: "#process", label: "作業内容" },
   { href: "#price", label: "料金" },
   { href: "#flow", label: "ご依頼の流れ" },
   { href: "#faq", label: "よくある質問" },
@@ -287,7 +289,7 @@ function Reasons() {
     <section id="reasons" className="bg-sky">
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
         <SectionHeading eyebrow="Up draftが選ばれる理由">はじめてでも、頼みやすく</SectionHeading>
-        <ol className="mt-12 grid gap-5 md:grid-cols-3">
+        <ol className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {reasons.map((r, i) => (
             <li key={r.title} className="rounded-3xl bg-white p-7">
               <p className="text-4xl font-black text-sky-deep">0{i + 1}</p>
@@ -297,6 +299,56 @@ function Reasons() {
           ))}
         </ol>
       </div>
+    </section>
+  );
+}
+
+function Process() {
+  return (
+    <section id="process" className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <SectionHeading eyebrow="作業工程">配管洗浄はこのように進めます</SectionHeading>
+      <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center gap-3 rounded-2xl bg-brand-teal-soft p-5 text-center md:flex-row md:text-left">
+        <span className="shrink-0 rounded-full bg-brand-teal px-4 py-2 text-sm font-black text-white">
+          全工程でpH値を確認
+        </span>
+        <p className="text-[15px] font-bold leading-relaxed text-navy-dark">
+          4種類の薬品を順番に使い、最後は中和剤で仕上げます。ひとつひとつの工程でpH値を確かめながら作業します。
+        </p>
+      </div>
+      <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {process.map((p, i) => (
+          <li
+            key={p.title}
+            className="flex flex-col rounded-3xl border border-line bg-white p-6"
+          >
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-lg font-black text-white">
+                {i + 1}
+              </span>
+              <p className="font-black leading-snug text-navy-dark">{p.title}</p>
+            </div>
+            {p.tag && (
+              <p className="mt-3 self-start rounded-md bg-sky px-2.5 py-1 text-sm font-bold text-navy">
+                {p.tag}
+              </p>
+            )}
+            <p className="mt-3 flex-1 text-[15px] leading-relaxed">{p.body}</p>
+            <p className="mt-4 flex items-center gap-1.5 text-xs font-bold text-brand-teal">
+              <CheckIcon className="h-4 w-4" />
+              pH値を確認
+            </p>
+          </li>
+        ))}
+        <li className="flex flex-col justify-center rounded-3xl bg-navy p-6 text-white">
+          <p className="text-sm font-bold text-white/75">ここまでの作業時間</p>
+          <p className="mt-1 text-4xl font-black">
+            約2<span className="text-lg">時間</span>
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-white/85">
+            次のお手入れは年1回が目安です。
+          </p>
+        </li>
+      </ol>
     </section>
   );
 }
@@ -544,6 +596,7 @@ export default function Home() {
         <Checklist />
         <Families />
         <Reasons />
+        <Process />
         <Price campaignActive={campaignActive} />
         <Flow />
         <Faq />
