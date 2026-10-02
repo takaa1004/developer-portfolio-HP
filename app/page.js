@@ -350,6 +350,31 @@ function Process() {
           </p>
         </li>
       </ol>
+      <h3 className="mt-14 text-center text-lg font-black text-navy-dark md:text-xl">
+        薬品ごとの浴槽の様子
+      </h3>
+      <ul className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+        {process
+          .filter((p) => p.photo)
+          .map((p) => (
+            <li key={p.photo}>
+              <figure className="relative aspect-[3/4] overflow-hidden rounded-2xl">
+                <Image
+                  src={p.photo}
+                  alt={p.photoAlt}
+                  fill
+                  sizes="(min-width: 768px) 270px, 45vw"
+                  className="object-cover"
+                />
+              </figure>
+              <p className="mt-2 text-sm font-black text-navy-dark">{p.title}</p>
+              <p className="text-xs font-bold text-muted">{p.tag}</p>
+            </li>
+          ))}
+      </ul>
+      <p className="mt-3 text-sm text-muted">
+        薬品Dの写真の泡の部分は、配管の中から出てきた汚れです。
+      </p>
     </section>
   );
 }
@@ -392,14 +417,14 @@ function Cases() {
             <h3 className="mt-3 text-xl font-black leading-snug text-navy-dark md:text-3xl">
               最初の薬品を入れた時点で、
               <br className="hidden md:block" />
-              汚れが次々と出てきました
+              汚れが出はじめたお宅です
             </h3>
             <p className="mt-5 leading-relaxed">
               1回目の薬品（スケール汚れ用）では、ふだんはまだ大きな変化が出ないことがほとんどです。
               このご家庭では、その段階からすでに汚れが浮き出てきました。それだけ配管の中に汚れがたまっていたということです。
             </p>
             <p className="mt-4 leading-relaxed">
-              浴槽に出てきた汚れは、ひしゃくでていねいにすくい取りながら作業を進めます。
+              動画は最後の中和（薬品D）の工程です。青いお湯に、配管から押し出された汚れがまだこれだけ浮いてきます。浴槽に出てきた汚れは、ひしゃくでていねいにすくい取ります。
             </p>
           </div>
         </div>
@@ -416,10 +441,13 @@ function Cases() {
                 sizes={g.wide ? "(min-width: 768px) 560px, 100vw" : "(min-width: 768px) 280px, 50vw"}
                 className="object-cover"
               />
+              <span className="absolute bottom-2 left-2 rounded-md bg-navy-dark/80 px-2 py-0.5 text-xs font-bold text-white">
+                薬品C 投入後
+              </span>
             </li>
           ))}
         </ul>
-        <p className="mt-3 text-sm text-muted">すべて実際の作業で撮影した写真です。</p>
+        <p className="mt-3 text-sm text-muted">すべて実際の作業で撮影した写真です。汚れが一番たくさん出てくるのは、薬品C（配管内部の汚れ洗浄）の工程です。</p>
       </div>
     </section>
   );
@@ -454,10 +482,10 @@ function Price({ campaignActive }) {
         </div>
       </div>
       <p className="mt-4 text-sm text-muted">
-        大阪市外の方は、お住まいの地域をお知らせください。お見積り・ご相談は無料です。
+        対応エリアは{company.area}です。大阪市外の方は、お住まいの地域をお知らせください。お支払いは{company.payment}。お見積り・ご相談は無料です。
       </p>
       <p className="mt-2 text-sm text-muted">
-        ※追い焚き機能のないお風呂、吸い込み口が2つあるタイプ（2つ穴）、ヒノキの浴槽は対応できません。
+        ※追い焚き機能のないお風呂（給水だけで循環しないタイプ）、吸い込み口が2つあるタイプ（2つ穴）、ヒノキの浴槽は対応できません。
       </p>
 
       {campaignActive && (
@@ -568,7 +596,9 @@ function Contact() {
               </span>
               {company.mobile}
             </p>
-            <p className="mt-3 text-sm text-white/75">スマートフォンからはタップで発信できます</p>
+            <p className="mt-3 text-sm text-white/75">
+              受付時間 {company.hours}　スマートフォンからはタップで発信できます
+            </p>
           </a>
           {channels.map((c) => (
             <div key={c.title} className="flex gap-4 rounded-3xl bg-white p-5 text-ink">
@@ -620,6 +650,8 @@ function Company() {
     ["FAX", company.fax],
     ["携帯", company.mobile],
     ["Mail", company.email],
+    ["受付時間", company.hours],
+    ["対応エリア", company.area],
     ["事業内容", "追い焚き配管クリーニング"],
     ["保険", "損害保険加入"],
   ];
