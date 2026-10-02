@@ -13,7 +13,15 @@ import {
   steps,
   telHref,
 } from "./_updraft/data";
-import { CheckIcon, Logo, PipeDiagram, SectionHeading } from "./_updraft/ui";
+import {
+  CheckIcon,
+  KidsBathIllust,
+  LineChatIllust,
+  Logo,
+  PipeDiagram,
+  SectionHeading,
+  SeniorBathIllust,
+} from "./_updraft/ui";
 
 // キャンペーン終了日を過ぎたら表示を切り替えるため、1時間ごとに再生成する
 export const revalidate = 3600;
@@ -267,6 +275,11 @@ function Families() {
       <div className="mt-10 grid gap-10 md:grid-cols-2">
         {families.map((f) => (
           <div key={f.key} className={`border-t-4 pt-5 ${tones[f.tone]}`}>
+            {f.key === "kids" ? (
+              <KidsBathIllust className="mb-3 h-24 w-auto" />
+            ) : (
+              <SeniorBathIllust className="mb-3 h-24 w-auto" />
+            )}
             <h3 className="text-lg font-black text-navy-dark md:text-xl">{f.title}</h3>
             <ul className="mt-3 space-y-1.5">
               {f.items.map((item) => (
@@ -530,8 +543,13 @@ function Contact() {
   return (
     <section id="contact" className="bg-navy text-white">
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
-        <h2 className="text-2xl font-black leading-snug md:text-4xl">「まずは相談だけ」でも大丈夫です。</h2>
-        <p className="mt-2 text-white/80">お見積り・ご相談は無料です。</p>
+        <div className="flex items-center gap-5">
+          <div className="flex-1">
+            <h2 className="text-2xl font-black leading-snug md:text-4xl">「まずは相談だけ」でも大丈夫です。</h2>
+            <p className="mt-2 text-white/80">お見積り・ご相談は無料です。お風呂の写真をLINEで送っていただくとスムーズです。</p>
+          </div>
+          <LineChatIllust className="h-28 w-auto shrink-0 md:h-36" />
+        </div>
         <a href={telHref(company.mobile)} className="mt-8 inline-flex items-center gap-3 text-3xl font-black tracking-wide md:text-5xl">
           <FaPhone className="h-7 w-7 md:h-9 md:w-9" />
           {company.mobile}

@@ -86,3 +86,80 @@ export function PipeDiagram({ className = "" }) {
     </svg>
   );
 }
+
+// 差し込み用のイラスト（線画・ブランドカラー）
+const INK = "#0b1f44";
+const WATER = "#cfe3f5";
+
+function Tub({ children }) {
+  return (
+    <>
+      <path d="M22 70 H198 V100 Q198 124 174 124 H46 Q22 124 22 100 Z" fill={WATER} />
+      <path d="M14 58 H206" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      <path d="M22 58 V100 Q22 128 50 128 H170 Q198 128 198 100 V58" fill="none" stroke={INK} strokeWidth="4" strokeLinejoin="round" />
+      <path d="M48 128 L42 140 M172 128 L178 140" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      {children}
+    </>
+  );
+}
+
+export function KidsBathIllust({ className = "" }) {
+  return (
+    <svg viewBox="0 0 220 150" role="img" aria-label="湯船に浮かぶアヒルのおもちゃのイラスト" className={className}>
+      <Tub>
+        {/* アヒル */}
+        <path d="M70 70 q0 -14 14 -14 q12 0 12 11 q10 -2 14 4 q4 10 -8 13 h-26 q-8 0 -6 -14 z" fill="#ffd84d" stroke={INK} strokeWidth="3" strokeLinejoin="round" />
+        <path d="M96 62 l9 2 l-9 3" fill="#e0452b" stroke={INK} strokeWidth="2" strokeLinejoin="round" />
+        <circle cx="88" cy="62" r="2" fill={INK} />
+        {/* 船 */}
+        <path d="M128 76 h34 l-6 8 h-22 z" fill="#fff" stroke={INK} strokeWidth="3" strokeLinejoin="round" />
+        <path d="M145 76 V56 l12 12 h-12" fill="#fff" stroke={INK} strokeWidth="3" strokeLinejoin="round" />
+        {/* 泡 */}
+        <circle cx="52" cy="48" r="6" fill="#fff" stroke={INK} strokeWidth="2.5" />
+        <circle cx="40" cy="36" r="4" fill="#fff" stroke={INK} strokeWidth="2.5" />
+        <circle cx="176" cy="44" r="5" fill="#fff" stroke={INK} strokeWidth="2.5" />
+      </Tub>
+    </svg>
+  );
+}
+
+export function SeniorBathIllust({ className = "" }) {
+  return (
+    <svg viewBox="0 0 220 150" role="img" aria-label="湯気の立つ湯船と湯おけ、たたんだタオルのイラスト" className={className}>
+      <Tub>
+        {/* 湯気 */}
+        <path d="M70 46 q-8 -8 0 -16 q8 -8 0 -16" fill="none" stroke={INK} strokeWidth="3" strokeLinecap="round" />
+        <path d="M100 46 q-8 -8 0 -16 q8 -8 0 -16" fill="none" stroke={INK} strokeWidth="3" strokeLinecap="round" />
+        <path d="M130 46 q-8 -8 0 -16 q8 -8 0 -16" fill="none" stroke={INK} strokeWidth="3" strokeLinecap="round" />
+        {/* タオル */}
+        <path d="M150 50 h40 v8 h-40 z" fill="#fff" stroke={INK} strokeWidth="3" strokeLinejoin="round" />
+        <path d="M156 50 v8 M184 50 v8" stroke="#1b6e62" strokeWidth="2" />
+        {/* 湯おけ */}
+        <path d="M30 32 h34 l-4 22 h-26 z" fill="#f3e3c3" stroke={INK} strokeWidth="3" strokeLinejoin="round" />
+        <path d="M33 40 h28" stroke={INK} strokeWidth="2" />
+        {/* 水面 */}
+        <path d="M44 84 q10 -5 20 0 t20 0 M120 96 q10 -5 20 0 t20 0" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+      </Tub>
+    </svg>
+  );
+}
+
+export function LineChatIllust({ className = "" }) {
+  return (
+    <svg viewBox="0 0 160 200" role="img" aria-label="スマートフォンでお風呂の写真を送って相談しているイラスト" className={className}>
+      <rect x="30" y="8" width="100" height="184" rx="14" fill="#fff" stroke={INK} strokeWidth="4" />
+      <path d="M66 20 h28" stroke={INK} strokeWidth="3" strokeLinecap="round" />
+      {/* 送った写真 */}
+      <rect x="62" y="36" width="56" height="42" rx="4" fill={WATER} stroke={INK} strokeWidth="2.5" />
+      <path d="M68 66 h44 v4 q0 4 -4 4 h-36 q-4 0 -4 -4 z" fill="#fff" stroke={INK} strokeWidth="2" />
+      <circle cx="104" cy="48" r="5" fill="#ffd84d" stroke={INK} strokeWidth="2" />
+      {/* 吹き出し */}
+      <rect x="62" y="86" width="56" height="20" rx="4" fill="#06c755" />
+      <path d="M68 96 h36" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+      <rect x="42" y="116" width="62" height="30" rx="4" fill="#eef1f6" stroke={INK} strokeWidth="2" />
+      <path d="M48 126 h44 M48 136 h30" stroke={INK} strokeWidth="2.5" strokeLinecap="round" />
+      <rect x="62" y="156" width="56" height="20" rx="4" fill="#06c755" />
+      <path d="M68 166 h26" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  );
+}
