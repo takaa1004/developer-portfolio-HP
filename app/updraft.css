@@ -12,6 +12,10 @@
   --color-muted: #5b6577;
   --color-line: #dfe4ec;
   --color-paper: #f4f6fa;
+  --color-sky: #eaf3fb;
+  --color-sky-deep: #cfe3f5;
+  --color-cream: #fbf8f2;
+  --color-line-green: #06c755;
 }
 
 html {
@@ -20,8 +24,31 @@ html {
 }
 
 body {
+  font-size: 17px;
+  line-height: 1.8;
   background: #ffffff;
   color: var(--color-ink);
   font-feature-settings: "palt";
   -webkit-font-smoothing: antialiased;
+}
+
+@keyframes pipe-flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+.pipe-flow {
+  animation: pipe-flow 1.2s linear infinite;
+}
+
+.pipe-flow-reverse {
+  animation: pipe-flow 1.2s linear infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pipe-flow,
+  .pipe-flow-reverse {
+    animation: none;
+  }
 }

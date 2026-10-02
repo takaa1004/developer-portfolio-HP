@@ -1,7 +1,18 @@
 import Image from "next/image";
 import { FaInstagram, FaLine, FaPhone } from "react-icons/fa6";
-import { checklist, company, isCampaignActive, price, risks, steps, telHref } from "./_updraft/data";
-import { CheckIcon, Logo, SectionHeading } from "./_updraft/ui";
+import {
+  causes,
+  checklist,
+  company,
+  faqs,
+  families,
+  isCampaignActive,
+  price,
+  reasons,
+  steps,
+  telHref,
+} from "./_updraft/data";
+import { CheckIcon, Logo, PipeDiagram, SectionHeading } from "./_updraft/ui";
 
 // キャンペーン終了日を過ぎたら表示を切り替えるため、1時間ごとに再生成する
 export const revalidate = 3600;
@@ -9,11 +20,39 @@ export const revalidate = 3600;
 const yen = (n) => n.toLocaleString("ja-JP");
 
 const nav = [
-  { href: "#risk", label: "配管の汚れ" },
+  { href: "#about", label: "配管の汚れ" },
+  { href: "#reasons", label: "選ばれる理由" },
   { href: "#price", label: "料金" },
   { href: "#flow", label: "ご依頼の流れ" },
+  { href: "#faq", label: "よくある質問" },
   { href: "#company", label: "会社概要" },
 ];
+
+function PhoneButton({ className = "", label }) {
+  return (
+    <a
+      href={telHref(company.mobile)}
+      className={`flex items-center justify-center gap-2 rounded-full bg-navy font-bold text-white hover:bg-navy-dark ${className}`}
+    >
+      <FaPhone className="h-4 w-4" />
+      {label ?? company.mobile}
+    </a>
+  );
+}
+
+function LineButton({ className = "", label = "LINEで相談する" }) {
+  return (
+    <a
+      href={company.lineUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`flex items-center justify-center gap-2 rounded-full bg-line-green font-bold text-white hover:opacity-90 ${className}`}
+    >
+      <FaLine className="h-5 w-5" />
+      {label}
+    </a>
+  );
+}
 
 function Header() {
   return (
@@ -21,11 +60,16 @@ function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:h-20 md:px-6">
         <a href="#top" className="flex items-center gap-2 text-navy">
           <Logo className="h-8 w-11 md:h-9 md:w-12" />
-          <span className="text-xl font-black tracking-wide text-navy-dark md:text-2xl">
-            Up draft
+          <span className="leading-none">
+            <span className="block text-xl font-black tracking-wide text-navy-dark md:text-2xl">
+              Up draft
+            </span>
+            <span className="mt-1 block text-[10px] font-bold text-muted md:text-xs">
+              追い焚き配管クリーニング
+            </span>
           </span>
         </a>
-        <nav className="hidden items-center gap-7 text-sm font-bold text-ink lg:flex">
+        <nav className="hidden items-center gap-6 text-sm font-bold text-ink xl:flex">
           {nav.map((item) => (
             <a key={item.href} href={item.href} className="hover:text-navy">
               {item.label}
@@ -33,16 +77,11 @@ function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a
-            href={telHref(company.mobile)}
-            className="hidden items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-bold text-white hover:bg-navy-dark md:flex"
-          >
-            <FaPhone className="h-4 w-4" />
-            {company.mobile}
-          </a>
+          <LineButton className="hidden px-5 py-2.5 text-sm md:flex" label="LINEで相談" />
+          <PhoneButton className="hidden px-5 py-2.5 text-sm md:flex" />
           <a
             href="#contact"
-            className="rounded-full bg-brand-red px-4 py-2 text-sm font-bold text-white hover:opacity-90 md:hidden"
+            className="rounded-full bg-navy px-4 py-2 text-sm font-bold text-white md:hidden"
           >
             お問い合わせ
           </a>
@@ -52,131 +91,122 @@ function Header() {
   );
 }
 
-function Hero() {
+function Hero({ campaignActive }) {
+  const points = [
+    ["作業時間", "約2時間"],
+    ["お手入れの目安", "年1回"],
+    ["お見積り・ご相談", "無料"],
+  ];
   return (
-    <section id="top" className="relative overflow-hidden bg-navy-dark text-white">
-      <Image
-        src="/updraft/work-2.jpg"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="scale-110 object-cover opacity-25 blur-sm"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-dark via-navy-dark/85 to-navy-dark/40" />
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-14 md:px-6 md:py-20 lg:grid-cols-[1.25fr_1fr] lg:items-center">
+    <section id="top" className="relative overflow-hidden bg-sky">
+      <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-white/60" />
+      <div className="pointer-events-none absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-sky-deep/50" />
+      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-12 md:px-6 md:py-20 lg:grid-cols-[1.15fr_1fr] lg:items-center">
         <div>
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="bg-brand-red px-3 py-1.5 text-sm font-bold md:text-base">
-              追い焚き配管クリーニング
-            </span>
-            <span className="rounded-full border border-white/70 px-3 py-1 text-xs font-bold md:text-sm">
-              マンションにお住まいのみなさまへ
-            </span>
-          </div>
-          <h1 className="mt-6 text-[1.85rem] font-black leading-tight sm:text-5xl lg:text-[3.2rem] xl:text-[3.6rem]">
-            <span className="whitespace-nowrap">家族が毎日入るお風呂。</span>
-            <br />
-            <span className="text-brand-yellow">配管の中</span>は、
-            <br />
-            <span className="whitespace-nowrap">こうなっています。</span>
-          </h1>
-          <p className="mt-6 font-bold text-white/90 md:text-lg">
-            追い焚き配管を洗浄したときに、実際に出てきた汚れです。
+          <p className="inline-block rounded-full bg-white px-4 py-1.5 text-sm font-bold text-navy shadow-sm">
+            マンションにお住まいのご家庭へ
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={telHref(company.mobile)}
-              className="flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-bold text-navy-dark hover:bg-paper"
-            >
-              <FaPhone className="h-4 w-4" />
-              電話で相談する
-            </a>
-            <a
-              href={company.lineUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-full bg-[#06C755] px-6 py-3.5 font-bold text-white hover:opacity-90"
-            >
-              <FaLine className="h-5 w-5" />
-              LINEで相談・見積り
-            </a>
+          <h1 className="mt-5 text-[1.9rem] font-black leading-[1.35] text-navy-dark sm:text-5xl sm:leading-[1.3]">
+            <span className="whitespace-nowrap">家族が毎日入るお風呂を、</span>
+            <br />
+            <span className="whitespace-nowrap">
+              <span className="bg-[linear-gradient(transparent_62%,#ffd84d_62%)]">見えない配管</span>
+              まで
+            </span>
+            <span className="whitespace-nowrap">きれいに。</span>
+          </h1>
+          <p className="mt-5 max-w-xl leading-relaxed text-ink">
+            浴槽をどれだけ洗っても、お湯の通り道である「追い焚き配管」の中は普段のお掃除では届きません。
+            Up draftが、配管の中にたまった汚れを洗い流します。
+          </p>
+          <ul className="mt-7 grid max-w-lg grid-cols-3 gap-2">
+            {points.map(([label, value]) => (
+              <li key={label} className="rounded-xl bg-white px-2 py-3 text-center shadow-sm">
+                <p className="text-[11px] font-bold leading-tight text-muted md:text-xs">{label}</p>
+                <p className="mt-1 text-xl font-black leading-none text-navy md:text-2xl">{value}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <LineButton className="px-7 py-4 text-lg" label="LINEで無料相談" />
+            <PhoneButton className="px-7 py-4 text-lg" label="電話で相談する" />
           </div>
-          <p className="mt-3 text-sm text-white/75">お見積り・ご相談は無料です。</p>
-        </div>
-        <div className="grid grid-cols-2 gap-3 md:gap-4">
-          {["/updraft/work-1.jpg", "/updraft/work-2.jpg"].map((src, i) => (
-            <figure
-              key={src}
-              className={`relative aspect-square overflow-hidden rounded-lg border-4 border-white shadow-2xl ${i === 1 ? "mt-8" : ""}`}
+          {campaignActive && (
+            <a
+              href="#price"
+              className="mt-5 inline-flex flex-wrap items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-ink shadow-sm hover:text-navy"
             >
-              <Image
-                src={src}
-                alt="追い焚き配管の洗浄中に浴槽へ出てきた汚れ"
-                fill
-                sizes="(min-width: 1024px) 240px, 45vw"
-                className="object-cover"
-              />
-            </figure>
-          ))}
+              <span className="rounded bg-brand-red px-2 py-0.5 text-xs text-white">チラシをお持ちの方</span>
+              {price.campaignEndLabel}までのお申し込みで {yen(price.campaign)}円 →
+            </a>
+          )}
+        </div>
+        <div className="rounded-3xl bg-white p-5 shadow-xl shadow-navy/5 md:p-7">
+          <p className="text-sm font-bold text-muted">追い焚き配管ってどこのこと？</p>
+          <PipeDiagram className="mt-3 w-full" />
+          <p className="mt-3 text-sm leading-relaxed text-ink">
+            浴槽の吸い込み口から給湯器までをつなぐ配管です。お湯はりや保温、追い焚きのたびに、お湯がこの中を行き来しています。
+          </p>
         </div>
       </div>
     </section>
   );
 }
 
-function RiskCard({ group, tone }) {
-  const styles =
-    tone === "red"
-      ? { head: "bg-brand-red", body: "bg-brand-red-soft", border: "border-brand-red", text: "text-brand-red" }
-      : { head: "bg-brand-teal", body: "bg-brand-teal-soft", border: "border-brand-teal", text: "text-brand-teal" };
+function About() {
   return (
-    <div className={`overflow-hidden rounded-xl border ${styles.border}`}>
-      <h3 className={`${styles.head} px-5 py-4 text-lg font-black text-white md:text-xl`}>
-        {group.title}
-      </h3>
-      <ol className={`${styles.body} space-y-5 px-5 py-6`}>
-        {group.items.map((item, i) => (
-          <li key={item.title} className="flex gap-3">
-            <span
-              className={`${styles.head} flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white`}
-            >
-              {i + 1}
-            </span>
-            <div>
-              <p className={`text-lg font-black ${styles.text}`}>{item.title}</p>
-              <p className="mt-1 text-sm leading-relaxed text-ink md:text-base">{item.body}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
-
-function Risk() {
-  return (
-    <section id="risk" className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-      <SectionHeading eyebrow="毎日のお湯は、この配管を通って浴槽に届きます">
-        <span className="text-brand-red">小さいお子さま</span>や
+    <section id="about" className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <SectionHeading eyebrow="配管の中のこと">
+        見えないところに、
         <br className="md:hidden" />
-        <span className="text-brand-teal">ご高齢の方</span>がいる
-        <br className="md:hidden" />
-        ご家庭は特に注意
+        汚れはたまっていきます
       </SectionHeading>
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        <RiskCard group={risks.kids} tone="red" />
-        <RiskCard group={risks.seniors} tone="teal" />
-      </div>
-      <div className="mt-8 flex flex-col items-start gap-3 rounded-xl bg-paper p-5 md:flex-row md:items-center md:justify-center">
-        <span className="shrink-0 rounded bg-navy-dark px-3 py-1 text-sm font-bold text-white">
-          レジオネラ属菌とは？
-        </span>
-        <p className="font-bold leading-relaxed text-navy-dark">
-          温かい水で増える菌。
-          <span className="text-brand-red">湯気やしぶきを吸い込むと、肺炎の原因</span>
-          になることがあります。
-        </p>
+      <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <div className="grid grid-cols-2 gap-3">
+            {["/updraft/work-1.jpg", "/updraft/work-2.jpg"].map((src) => (
+              <figure key={src} className="relative aspect-square overflow-hidden rounded-2xl">
+                <Image
+                  src={src}
+                  alt="追い焚き配管の洗浄中に浴槽へ出てきた汚れ"
+                  fill
+                  sizes="(min-width: 1024px) 280px, 45vw"
+                  className="object-cover"
+                />
+              </figure>
+            ))}
+          </div>
+          <p className="mt-3 text-sm text-muted">
+            実際に追い焚き配管を洗浄したときに、浴槽へ出てきた汚れです。
+          </p>
+        </div>
+        <div>
+          <p className="text-lg font-bold leading-relaxed text-navy-dark">
+            見た目はきれいなお風呂でも、配管の中から出てくるのはこうした汚れです。
+            毎日入るお湯は、この配管を通って浴槽に届いています。
+          </p>
+          <ol className="mt-8 space-y-5">
+            {causes.map((c, i) => (
+              <li key={c.title} className="flex gap-4">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sky font-black text-navy">
+                  {i + 1}
+                </span>
+                <div>
+                  <p className="font-black text-navy-dark">{c.title}</p>
+                  <p className="mt-1 text-[15px] leading-relaxed text-ink">{c.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-8 rounded-2xl bg-cream p-5">
+            <p className="font-black text-navy-dark">レジオネラ属菌とは？</p>
+            <p className="mt-1 text-[15px] leading-relaxed">
+              温かい水で増える菌です。湯気やしぶきを吸い込むと、
+              <strong className="text-brand-red">肺炎の原因</strong>
+              になることがあります。
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -184,81 +214,141 @@ function Risk() {
 
 function Checklist() {
   return (
-    <section className="bg-paper">
-      <div className="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-24">
-        <SectionHeading>こんなことはありませんか？</SectionHeading>
-        <ul className="mt-10 space-y-3">
+    <section className="bg-navy text-white">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:px-6 md:py-20 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+        <div>
+          <p className="text-sm font-bold text-white/70">セルフチェック</p>
+          <h2 className="mt-2 text-2xl font-black leading-snug md:text-4xl">
+            こんなことは
+            <br className="hidden lg:block" />
+            ありませんか？
+          </h2>
+          <p className="mt-4 text-white/85">
+            ひとつでも当てはまったら、配管のお手入れどきかもしれません。お気軽にご相談ください。
+          </p>
+        </div>
+        <ul className="space-y-3">
           {checklist.map((item) => (
-            <li key={item.title} className="flex gap-4 rounded-xl border border-line bg-white p-5">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded border-2 border-navy text-brand-red">
+            <li key={item.title} className="flex gap-4 rounded-2xl bg-white p-5 text-ink">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-brand-red text-white">
                 <CheckIcon className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-lg font-bold text-navy-dark">{item.title}</p>
+                <p className="font-bold text-navy-dark">{item.title}</p>
                 {item.note && <p className="mt-1 text-sm text-muted">{item.note}</p>}
               </div>
             </li>
           ))}
         </ul>
-        <p className="mt-8 rounded-lg bg-navy px-5 py-4 text-center font-bold text-white">
-          ひとつでも当てはまったら、一度ご相談ください
-        </p>
       </div>
     </section>
   );
 }
 
-function Price() {
-  const campaignActive = isCampaignActive();
+function Families() {
+  const tones = {
+    coral: { text: "text-brand-red", bg: "bg-brand-red-soft" },
+    teal: { text: "text-brand-teal", bg: "bg-brand-teal-soft" },
+  };
+  return (
+    <section className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <SectionHeading eyebrow="こんなご家庭に">
+        <span className="text-brand-red">小さいお子さま</span>や
+        <br className="md:hidden" />
+        <span className="text-brand-teal">ご高齢の方</span>がいる
+        <br className="md:hidden" />
+        ご家庭こそ
+      </SectionHeading>
+      <div className="mt-12 grid gap-6 md:grid-cols-2">
+        {families.map((f) => {
+          const t = tones[f.tone];
+          return (
+            <div key={f.key} className={`rounded-3xl ${t.bg} p-6 md:p-8`}>
+              <p className={`text-sm font-bold ${t.text}`}>{f.lead}</p>
+              <h3 className="mt-1 text-xl font-black text-navy-dark md:text-2xl">{f.title}</h3>
+              <ul className="mt-6 space-y-3">
+                {f.items.map((item) => (
+                  <li key={item.title} className="rounded-2xl bg-white p-4">
+                    <p className={`font-black ${t.text}`}>{item.title}</p>
+                    <p className="mt-1 text-[15px] leading-relaxed">{item.body}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function Reasons() {
+  return (
+    <section id="reasons" className="bg-sky">
+      <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <SectionHeading eyebrow="Up draftが選ばれる理由">はじめてでも、頼みやすく</SectionHeading>
+        <ol className="mt-12 grid gap-5 md:grid-cols-3">
+          {reasons.map((r, i) => (
+            <li key={r.title} className="rounded-3xl bg-white p-7">
+              <p className="text-4xl font-black text-sky-deep">0{i + 1}</p>
+              <h3 className="mt-2 text-lg font-black leading-snug text-navy-dark">{r.title}</h3>
+              <p className="mt-3 text-[15px] leading-relaxed">{r.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function Price({ campaignActive }) {
   return (
     <section id="price" className="mx-auto max-w-4xl px-4 py-16 md:px-6 md:py-24">
-      <SectionHeading eyebrow="料金・作業時間">追い焚き配管クリーニング</SectionHeading>
-      <div className="mt-10 grid grid-cols-2 gap-4">
-        <div className="rounded-xl bg-paper py-5 text-center">
-          <p className="text-sm font-bold text-muted">作業時間</p>
-          <p className="mt-1 text-2xl font-black text-navy-dark md:text-3xl">
-            約2<span className="text-base">時間</span>
-          </p>
-        </div>
-        <div className="rounded-xl bg-paper py-5 text-center">
-          <p className="text-sm font-bold text-muted">目安</p>
-          <p className="mt-1 text-2xl font-black text-navy-dark md:text-3xl">
-            年1<span className="text-base">回</span>
-          </p>
+      <SectionHeading eyebrow="料金">追い焚き配管クリーニング</SectionHeading>
+      <div className="mt-10 overflow-hidden rounded-3xl border-2 border-navy">
+        <div className="grid md:grid-cols-[1.4fr_1fr]">
+          <div className="p-7 md:p-9">
+            <p className="font-bold text-muted">配管洗浄 1回（税込）</p>
+            <p className="mt-2 flex items-baseline gap-1 text-navy-dark">
+              <span className="text-5xl font-black tracking-tight md:text-6xl">{yen(price.regular)}</span>
+              <span className="text-lg font-bold">円</span>
+            </p>
+            <p className="mt-3 inline-block rounded-full bg-sky px-3 py-1 text-sm font-bold text-navy">
+              出張費込み（大阪市内）
+            </p>
+          </div>
+          <dl className="grid grid-cols-2 border-t-2 border-navy bg-paper md:grid-cols-1 md:border-l-2 md:border-t-0">
+            <div className="p-6 text-center">
+              <dt className="text-sm font-bold text-muted">作業時間</dt>
+              <dd className="mt-1 text-2xl font-black text-navy-dark">約2時間</dd>
+            </div>
+            <div className="border-l-2 border-navy p-6 text-center md:border-l-0 md:border-t-2">
+              <dt className="text-sm font-bold text-muted">お手入れの目安</dt>
+              <dd className="mt-1 text-2xl font-black text-navy-dark">年1回</dd>
+            </div>
+          </dl>
         </div>
       </div>
-
-      <div className="relative mt-8 rounded-2xl bg-brand-red px-6 pb-8 pt-10 text-white md:px-10">
-        {campaignActive && (
-          <p className="absolute -top-4 left-1/2 w-max max-w-[92%] -translate-x-1/2 rounded-md bg-brand-yellow px-4 py-1.5 text-center text-sm font-black text-navy-dark md:text-base">
-            チラシ限定｜{price.campaignEndLabel}までのお申し込み
-          </p>
-        )}
-        <p className="text-lg font-bold">追い焚き配管クリーニング</p>
-        {campaignActive && (
-          <p className="mt-1 text-sm text-white/80 line-through">
-            通常価格 {yen(price.regular)}円（税込）
-          </p>
-        )}
-        <p className="mt-1 flex items-baseline gap-2">
-          <span className="text-6xl font-black tracking-tight md:text-7xl">
-            {yen(campaignActive ? price.campaign : price.regular)}
-          </span>
-          <span className="text-lg font-bold">円（税込）</span>
-        </p>
-        <p className="mt-2 text-sm font-bold">出張費込み（大阪市内）</p>
-        {campaignActive && (
-          <p className="mt-6 rounded-lg border-2 border-dashed border-white/80 bg-white px-4 py-3 text-sm font-bold text-ink">
-            この料金はチラシをお持ちの方が対象です。お申し込みの際に、チラシに記載の
-            <span className="text-brand-red">チラシ番号</span>をお伝えください。
-          </p>
-        )}
-      </div>
-      <p className="mt-8 text-center text-lg font-black text-navy-dark md:text-2xl">
-        ご予約が混み合うことが予想されます。
-        <br className="md:hidden" />
-        <span className="text-brand-red">お早めにご連絡ください</span>
+      <p className="mt-4 text-sm text-muted">
+        大阪市外の方は、お住まいの地域をお知らせください。お見積り・ご相談は無料です。
       </p>
+
+      {campaignActive && (
+        <div className="mt-10 rounded-3xl bg-brand-red p-7 text-white md:p-9">
+          <p className="inline-block rounded bg-brand-yellow px-3 py-1 text-sm font-black text-navy-dark">
+            チラシをお持ちの方限定｜{price.campaignEndLabel}までのお申し込み
+          </p>
+          <p className="mt-4 flex flex-wrap items-baseline gap-x-3">
+            <span className="text-white/80 line-through">{yen(price.regular)}円</span>
+            <span className="text-5xl font-black md:text-6xl">{yen(price.campaign)}</span>
+            <span className="text-lg font-bold">円（税込）</span>
+          </p>
+          <p className="mt-4 rounded-xl bg-white px-4 py-3 text-[15px] font-bold text-ink">
+            お申し込みの際に、チラシに記載の<span className="text-brand-red">チラシ番号</span>をお伝えください。
+            ご予約が混み合うことが予想されます。お早めにご連絡ください。
+          </p>
+        </div>
+      )}
     </section>
   );
 }
@@ -268,15 +358,40 @@ function Flow() {
     <section id="flow" className="bg-paper">
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
         <SectionHeading eyebrow="ご依頼の流れ">ご相談から完了まで</SectionHeading>
-        <ol className="mt-10 grid gap-4 md:grid-cols-4">
+        <ol className="mt-12 grid gap-4 md:grid-cols-4">
           {steps.map((step, i) => (
-            <li key={step.title} className="rounded-xl bg-white p-6">
+            <li key={step.title} className="rounded-3xl bg-white p-6">
               <p className="text-sm font-black text-brand-red">STEP {i + 1}</p>
-              <p className="mt-1 text-xl font-black text-navy-dark">{step.title}</p>
-              <p className="mt-3 text-sm leading-relaxed text-ink">{step.body}</p>
+              <p className="mt-1 text-lg font-black text-navy-dark">{step.title}</p>
+              <p className="mt-3 text-[15px] leading-relaxed">{step.body}</p>
             </li>
           ))}
         </ol>
+      </div>
+    </section>
+  );
+}
+
+function Faq() {
+  return (
+    <section id="faq" className="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-24">
+      <SectionHeading eyebrow="よくあるご質問">気になること、お答えします</SectionHeading>
+      <div className="mt-10 space-y-3">
+        {faqs.map((f) => (
+          <details key={f.q} className="group rounded-2xl border border-line bg-white open:bg-sky/40">
+            <summary className="flex cursor-pointer list-none items-start gap-3 p-5 font-bold text-navy-dark [&::-webkit-details-marker]:hidden">
+              <span className="font-black text-navy">Q.</span>
+              <span className="flex-1">{f.q}</span>
+              <span className="mt-0.5 text-xl leading-none text-navy transition-transform group-open:rotate-45">
+                +
+              </span>
+            </summary>
+            <div className="flex gap-3 px-5 pb-5">
+              <span className="font-black text-brand-red">A.</span>
+              <p className="flex-1 leading-relaxed">{f.a}</p>
+            </div>
+          </details>
+        ))}
       </div>
     </section>
   );
@@ -290,8 +405,8 @@ function Contact() {
       href: company.lineUrl,
       qr: "/updraft/qr-line.svg",
       icon: FaLine,
-      color: "bg-[#06C755]",
-      text: "text-[#06C755]",
+      color: "bg-line-green",
+      text: "text-line-green",
       cta: "友だち追加",
     },
     {
@@ -317,19 +432,19 @@ function Contact() {
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           <a
             href={telHref(company.mobile)}
-            className="flex flex-col justify-center rounded-2xl bg-white/10 p-6 md:col-span-2 ring-1 ring-white/20 hover:bg-white/15"
+            className="flex flex-col justify-center rounded-3xl bg-white/10 p-7 ring-1 ring-white/20 hover:bg-white/15 md:col-span-2"
           >
             <p className="text-sm font-bold text-white/80">お電話でのご相談</p>
-            <p className="mt-2 flex items-center gap-3 text-3xl font-black tracking-wide md:text-4xl">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-navy">
-                <FaPhone className="h-5 w-5" />
+            <p className="mt-2 flex items-center gap-3 text-3xl font-black tracking-wide md:text-5xl">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-navy md:h-14 md:w-14">
+                <FaPhone className="h-5 w-5 md:h-6 md:w-6" />
               </span>
               {company.mobile}
             </p>
-            <p className="mt-3 text-sm text-white/75">タップで発信できます</p>
+            <p className="mt-3 text-sm text-white/75">スマートフォンからはタップで発信できます</p>
           </a>
           {channels.map((c) => (
-            <div key={c.title} className="flex gap-4 rounded-2xl bg-white p-5 text-ink">
+            <div key={c.title} className="flex gap-4 rounded-3xl bg-white p-5 text-ink">
               <Image
                 src={c.qr}
                 alt={`${c.title}のQRコード`}
@@ -387,7 +502,7 @@ function Company() {
         {rows.map(([k, v]) => (
           <div key={k} className="grid gap-1 py-4 md:grid-cols-[10rem_1fr] md:gap-6">
             <dt className="text-sm font-bold text-muted">{k}</dt>
-            <dd className="break-words text-ink">{v}</dd>
+            <dd className="break-words">{v}</dd>
           </div>
         ))}
       </dl>
@@ -412,36 +527,26 @@ function Footer() {
 function MobileCallBar() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-line bg-white p-2 md:hidden">
-      <a
-        href={telHref(company.mobile)}
-        className="flex items-center justify-center gap-2 rounded-lg bg-navy py-3 font-bold text-white"
-      >
-        <FaPhone className="h-4 w-4" />
-        電話する
-      </a>
-      <a
-        href={company.lineUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-lg bg-[#06C755] py-3 font-bold text-white"
-      >
-        <FaLine className="h-5 w-5" />
-        LINEで相談
-      </a>
+      <PhoneButton className="rounded-lg py-3" label="電話する" />
+      <LineButton className="rounded-lg py-3" label="LINEで相談" />
     </div>
   );
 }
 
 export default function Home() {
+  const campaignActive = isCampaignActive();
   return (
     <>
       <Header />
       <main>
-        <Hero />
-        <Risk />
+        <Hero campaignActive={campaignActive} />
+        <About />
         <Checklist />
-        <Price />
+        <Families />
+        <Reasons />
+        <Price campaignActive={campaignActive} />
         <Flow />
+        <Faq />
         <Contact />
         <Company />
       </main>
