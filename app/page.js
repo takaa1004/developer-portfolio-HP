@@ -313,7 +313,7 @@ function Process() {
           全工程でpH値を確認
         </span>
         <p className="text-[15px] font-bold leading-relaxed text-navy-dark">
-          4種類の薬品を順番に使い、最後は中和剤で仕上げます。ひとつひとつの工程でpH値を確かめながら作業します。
+          マイクロバブル発生機で細かい泡を送り込みながら、4種類の薬品を順番に使い、最後は中和剤で仕上げます。ひとつひとつの工程でpH値を確かめながら作業します。
         </p>
       </div>
       <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -455,6 +455,9 @@ function Price({ campaignActive }) {
       </div>
       <p className="mt-4 text-sm text-muted">
         大阪市外の方は、お住まいの地域をお知らせください。お見積り・ご相談は無料です。
+      </p>
+      <p className="mt-2 text-sm text-muted">
+        ※追い焚き機能のないお風呂、吸い込み口が2つあるタイプ（2つ穴）、ヒノキの浴槽は対応できません。
       </p>
 
       {campaignActive && (
@@ -618,6 +621,7 @@ function Company() {
     ["携帯", company.mobile],
     ["Mail", company.email],
     ["事業内容", "追い焚き配管クリーニング"],
+    ["保険", "損害保険加入"],
   ];
   return (
     <section id="company" className="mx-auto max-w-4xl px-4 py-16 md:px-6 md:py-24">
