@@ -22,11 +22,8 @@ const yen = (n) => n.toLocaleString("ja-JP");
 
 const nav = [
   { href: "#about", label: "配管の汚れ" },
-  { href: "#reasons", label: "選ばれる理由" },
-  { href: "#process", label: "作業内容" },
-  { href: "#cases", label: "作業の様子" },
+  { href: "#process", label: "作業工程" },
   { href: "#price", label: "料金" },
-  { href: "#flow", label: "ご依頼の流れ" },
   { href: "#faq", label: "よくある質問" },
   { href: "#company", label: "会社概要" },
 ];
@@ -35,7 +32,7 @@ function PhoneButton({ className = "", label }) {
   return (
     <a
       href={telHref(company.mobile)}
-      className={`flex items-center justify-center gap-2 rounded-full bg-navy font-bold text-white hover:bg-navy-dark ${className}`}
+      className={`flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-navy font-bold text-white hover:bg-navy-dark ${className}`}
     >
       <FaPhone className="h-4 w-4" />
       {label ?? company.mobile}
@@ -49,11 +46,28 @@ function LineButton({ className = "", label = "LINEで相談する" }) {
       href={company.lineUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`flex items-center justify-center gap-2 rounded-full bg-line-green font-bold text-white hover:opacity-90 ${className}`}
+      className={`flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-line-green font-bold text-white hover:opacity-90 ${className}`}
     >
       <FaLine className="h-5 w-5" />
       {label}
     </a>
+  );
+}
+
+function CtaBand({ lead = "お見積り・ご相談は無料です" }) {
+  return (
+    <div className="mx-auto max-w-3xl px-4 md:px-6">
+      <div className="rounded-3xl border-2 border-line-green/40 bg-white p-5 text-center shadow-sm md:p-6">
+        <p className="font-black text-navy-dark">{lead}</p>
+        <p className="mt-1 text-sm text-muted">
+          LINEはメッセージだけでOK。受付時間 {company.hours}
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <LineButton className="px-6 py-3.5" label="LINEで無料見積り" />
+          <PhoneButton className="px-6 py-3.5" label={`電話する ${company.mobile}`} />
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -63,7 +77,7 @@ function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:h-20 md:px-6">
         <a href="#top" className="flex items-center gap-2 text-navy">
           <Logo className="h-8 w-11 md:h-9 md:w-12" />
-          <span className="leading-none">
+          <span className="whitespace-nowrap leading-none">
             <span className="block text-xl font-black tracking-wide text-navy-dark md:text-2xl">
               Up draft
             </span>
@@ -72,7 +86,7 @@ function Header() {
             </span>
           </span>
         </a>
-        <nav className="hidden items-center gap-6 text-sm font-bold text-ink xl:flex">
+        <nav className="hidden items-center gap-5 whitespace-nowrap text-sm font-bold text-ink xl:flex">
           {nav.map((item) => (
             <a key={item.href} href={item.href} className="hover:text-navy">
               {item.label}
@@ -106,8 +120,13 @@ function Hero({ campaignActive }) {
       <div className="pointer-events-none absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-sky-deep/50" />
       <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-12 md:px-6 md:py-20 lg:grid-cols-[1.15fr_1fr] lg:items-center">
         <div>
-          <p className="inline-block rounded-full bg-white px-4 py-1.5 text-sm font-bold text-navy shadow-sm">
-            マンションにお住まいのご家庭へ
+          <p className="flex flex-wrap gap-2">
+            <span className="rounded-full bg-navy px-4 py-1.5 text-sm font-bold text-white">
+              大阪の追い焚き配管クリーニング
+            </span>
+            <span className="rounded-full bg-white px-4 py-1.5 text-sm font-bold text-navy shadow-sm">
+              マンションにお住まいのご家庭へ
+            </span>
           </p>
           <h1 className="mt-5 text-[1.9rem] font-black leading-[1.35] text-navy-dark sm:text-5xl sm:leading-[1.3]">
             <span className="whitespace-nowrap">家族が毎日入るお風呂を、</span>
@@ -143,6 +162,22 @@ function Hero({ campaignActive }) {
               {price.campaignEndLabel}までのお申し込みで {yen(price.campaign)}円 →
             </a>
           )}
+          <nav aria-label="このページの内容" className="mt-6 flex flex-wrap gap-2">
+            {[
+              ["#about", "配管の汚れ"],
+              ["#process", "作業工程"],
+              ["#price", "料金"],
+              ["#faq", "よくある質問"],
+            ].map(([href, label]) => (
+              <a
+                key={href}
+                href={href}
+                className="rounded-full border border-navy/20 bg-white/70 px-3.5 py-1.5 text-sm font-bold text-navy hover:bg-white"
+              >
+                {label} ↓
+              </a>
+            ))}
+          </nav>
         </div>
         <div className="rounded-3xl bg-white p-5 shadow-xl shadow-navy/5 md:p-7">
           <p className="text-sm font-bold text-muted">追い焚き配管ってどこのこと？</p>
@@ -220,7 +255,7 @@ function Checklist() {
     <section className="bg-navy text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:px-6 md:py-20 lg:grid-cols-[1fr_1.2fr] lg:items-center">
         <div>
-          <p className="text-sm font-bold text-white/70">セルフチェック</p>
+          <p className="text-sm font-bold text-white/70">こんな方におすすめです</p>
           <h2 className="mt-2 text-2xl font-black leading-snug md:text-4xl">
             こんなことは
             <br className="hidden lg:block" />
@@ -469,24 +504,31 @@ function Price({ campaignActive }) {
               出張費込み（大阪市内）
             </p>
           </div>
-          <dl className="grid grid-cols-2 border-t-2 border-navy bg-paper md:grid-cols-1 md:border-l-2 md:border-t-0">
-            <div className="p-6 text-center">
-              <dt className="text-sm font-bold text-muted">作業時間</dt>
-              <dd className="mt-1 text-2xl font-black text-navy-dark">約2時間</dd>
-            </div>
-            <div className="border-l-2 border-navy p-6 text-center md:border-l-0 md:border-t-2">
-              <dt className="text-sm font-bold text-muted">お手入れの目安</dt>
-              <dd className="mt-1 text-2xl font-black text-navy-dark">年1回</dd>
-            </div>
+          <dl className="divide-y divide-line border-t-2 border-navy bg-paper text-[15px] md:border-l-2 md:border-t-0">
+            {[
+              ["作業時間", "約2時間"],
+              ["お手入れの目安", "年1回"],
+              ["対応エリア", `${company.area}（大阪市外の出張費はご相談ください）`],
+              ["お支払い", company.payment],
+            ].map(([k, v]) => (
+              <div key={k} className="grid grid-cols-[6.5rem_1fr] gap-2 px-5 py-3">
+                <dt className="font-bold text-muted">{k}</dt>
+                <dd className="font-bold text-navy-dark">{v}</dd>
+              </div>
+            ))}
           </dl>
         </div>
       </div>
-      <p className="mt-4 text-sm text-muted">
-        対応エリアは{company.area}です。大阪市外の方は、お住まいの地域をお知らせください。お支払いは{company.payment}。お見積り・ご相談は無料です。
-      </p>
-      <p className="mt-2 text-sm text-muted">
-        ※追い焚き機能のないお風呂（給水だけで循環しないタイプ）、吸い込み口が2つあるタイプ（2つ穴）、ヒノキの浴槽は対応できません。
-      </p>
+      <div className="mt-6 rounded-2xl bg-paper p-5">
+        <p className="font-black text-navy-dark">ご依頼の前にご確認ください</p>
+        <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[15px] leading-relaxed">
+          <li>
+            追い焚き機能のないお風呂（給水だけで循環しないタイプ）、吸い込み口が2つあるタイプ（2つ穴）、ヒノキの浴槽は対応できません。
+          </li>
+          <li>ご自宅のお風呂の品番をご確認ください。</li>
+          <li>エコキュートをお使いの場合は、お湯が残っているかをご確認ください。</li>
+        </ul>
+      </div>
 
       {campaignActive && (
         <div className="mt-10 rounded-3xl bg-brand-red p-7 text-white md:p-9">
@@ -703,10 +745,19 @@ export default function Home() {
         <About />
         <Checklist />
         <Families />
+        <div className="pb-16 md:pb-24">
+          <CtaBand lead="気になったら、まずはお気軽にご相談ください" />
+        </div>
         <Reasons />
         <Process />
+        <div className="pb-16 md:pb-24">
+          <CtaBand lead="作業時間は約2時間。お見積りは無料です" />
+        </div>
         <Cases />
         <Price campaignActive={campaignActive} />
+        <div className="pb-16 md:pb-24">
+          <CtaBand lead="ご予約・お見積りはLINEかお電話で" />
+        </div>
         <Flow />
         <Faq />
         <Contact />
