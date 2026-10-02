@@ -80,7 +80,7 @@ export function PipeDiagram({ className = "" }) {
 
       {/* ラベル */}
       <g>
-        <rect x="282" y="168" width="108" height="28" rx="14" fill="#e0452b" />
+        <rect x="282" y="168" width="108" height="28" rx="4" fill="#e0452b" />
         <text x="336" y="187" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff">追い焚き配管</text>
       </g>
     </svg>
