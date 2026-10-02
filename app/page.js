@@ -24,6 +24,7 @@ const nav = [
   { href: "#about", label: "配管の汚れ" },
   { href: "#reasons", label: "選ばれる理由" },
   { href: "#process", label: "作業内容" },
+  { href: "#cases", label: "作業の様子" },
   { href: "#price", label: "料金" },
   { href: "#flow", label: "ご依頼の流れ" },
   { href: "#faq", label: "よくある質問" },
@@ -166,7 +167,7 @@ function About() {
       <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
           <div className="grid grid-cols-2 gap-3">
-            {["/updraft/work-1.jpg", "/updraft/work-2.jpg"].map((src) => (
+            {["/updraft/case-scoop-2.jpg", "/updraft/case-green.jpg"].map((src) => (
               <figure key={src} className="relative aspect-square overflow-hidden rounded-2xl">
                 <Image
                   src={src}
@@ -349,6 +350,77 @@ function Process() {
           </p>
         </li>
       </ol>
+    </section>
+  );
+}
+
+const gallery = [
+  { src: "/updraft/case-foam-wide.jpg", alt: "浴槽いっぱいに広がった配管からの汚れ", wide: true },
+  { src: "/updraft/case-scoop-1.jpg", alt: "浴槽に出てきた汚れをすくい取る作業" },
+  { src: "/updraft/case-scoop-3.jpg", alt: "泡立った汚れを取り除く作業" },
+  { src: "/updraft/case-ladle.jpg", alt: "洗浄中の浴槽と、汚れをすくうひしゃく" },
+  { src: "/updraft/case-yellow.jpg", alt: "配管から押し出された黄土色の汚れ" },
+  { src: "/updraft/case-port.jpg", alt: "循環口まわりに集まった汚れ" },
+  { src: "/updraft/case-sludge.jpg", alt: "かたまりになった汚れを取り除く様子" },
+];
+
+function Cases() {
+  return (
+    <section id="cases" className="bg-paper">
+      <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <SectionHeading eyebrow="作業の様子">実際の現場から</SectionHeading>
+        <div className="mt-12 grid gap-8 md:grid-cols-[minmax(0,300px)_1fr] md:items-center lg:gap-14">
+          <figure className="mx-auto w-full max-w-[300px] overflow-hidden rounded-3xl bg-navy-dark shadow-xl">
+            <video
+              poster="/updraft/case-video-poster.jpg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="配管洗浄中に浴槽へ出てきた汚れをすくい取る様子の動画"
+              className="aspect-[9/16] w-full object-cover"
+            >
+              <source src="/updraft/case-video.webm" type="video/webm" />
+              <source src="/updraft/case-video.mp4" type="video/mp4" />
+            </video>
+          </figure>
+          <div>
+            <p className="inline-block rounded-full bg-white px-3 py-1 text-sm font-bold text-brand-red">
+              ある日の現場より
+            </p>
+            <h3 className="mt-3 text-xl font-black leading-snug text-navy-dark md:text-3xl">
+              最初の薬品を入れた時点で、
+              <br className="hidden md:block" />
+              汚れが次々と出てきました
+            </h3>
+            <p className="mt-5 leading-relaxed">
+              1回目の薬品（スケール汚れ用）では、ふだんはまだ大きな変化が出ないことがほとんどです。
+              このご家庭では、その段階からすでに汚れが浮き出てきました。それだけ配管の中に汚れがたまっていたということです。
+            </p>
+            <p className="mt-4 leading-relaxed">
+              浴槽に出てきた汚れは、ひしゃくでていねいにすくい取りながら作業を進めます。
+            </p>
+          </div>
+        </div>
+        <ul className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {gallery.map((g) => (
+            <li
+              key={g.src}
+              className={`relative overflow-hidden rounded-2xl ${g.wide ? "col-span-2 aspect-[2/1] md:aspect-auto" : "aspect-square"}`}
+            >
+              <Image
+                src={g.src}
+                alt={g.alt}
+                fill
+                sizes={g.wide ? "(min-width: 768px) 560px, 100vw" : "(min-width: 768px) 280px, 50vw"}
+                className="object-cover"
+              />
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-sm text-muted">すべて実際の作業で撮影した写真です。</p>
+      </div>
     </section>
   );
 }
@@ -597,6 +669,7 @@ export default function Home() {
         <Families />
         <Reasons />
         <Process />
+        <Cases />
         <Price campaignActive={campaignActive} />
         <Flow />
         <Faq />
