@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FaInstagram, FaLine, FaPhone } from "react-icons/fa6";
-import { checklist, company, price, risks, steps, telHref } from "./_updraft/data";
+import { checklist, company, isCampaignActive, price, risks, steps, telHref } from "./_updraft/data";
 import { CheckIcon, Logo, SectionHeading } from "./_updraft/ui";
 
 // キャンペーン終了日を過ぎたら表示を切り替えるため、1時間ごとに再生成する
@@ -209,7 +209,7 @@ function Checklist() {
 }
 
 function Price() {
-  const campaignActive = Date.now() <= new Date(price.campaignEnd).getTime();
+  const campaignActive = isCampaignActive();
   return (
     <section id="price" className="mx-auto max-w-4xl px-4 py-16 md:px-6 md:py-24">
       <SectionHeading eyebrow="料金・作業時間">追い焚き配管クリーニング</SectionHeading>

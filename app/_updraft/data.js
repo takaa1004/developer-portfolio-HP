@@ -98,3 +98,6 @@ export const steps = [
     body: "作業が終われば完了です。次のお手入れは年1回が目安です。",
   },
 ];
+
+export const isCampaignActive = (now = new Date()) =>
+  now.getTime() <= new Date(price.campaignEnd).getTime();
