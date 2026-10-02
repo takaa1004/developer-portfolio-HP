@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaInstagram, FaLine, FaPhone } from "react-icons/fa6";
 import {
   causes,
@@ -17,24 +18,16 @@ import {
   CheckIcon,
   KidsBathIllust,
   LineChatIllust,
-  Logo,
   PipeDiagram,
   SectionHeading,
   SeniorBathIllust,
 } from "./_updraft/ui";
+import { CtaStrip, Footer, Header, LineButton, MobileCallBar, More, PhoneButton } from "./_updraft/site";
 
 // キャンペーン終了日を過ぎたら表示を切り替えるため、1時間ごとに再生成する
 export const revalidate = 3600;
 
 const yen = (n) => n.toLocaleString("ja-JP");
-
-const nav = [
-  { href: "#about", label: "配管の汚れ" },
-  { href: "#process", label: "作業工程" },
-  { href: "#price", label: "料金" },
-  { href: "#faq", label: "よくある質問" },
-  { href: "#company", label: "会社概要" },
-];
 
 const gallery = [
   { src: "/updraft/case-foam-wide.jpg", alt: "浴槽いっぱいに広がった配管からの汚れ" },
@@ -46,98 +39,6 @@ const gallery = [
   { src: "/updraft/case-sludge.jpg", alt: "かたまりになった汚れを取り除く様子" },
 ];
 
-function PhoneButton({ className = "", label }) {
-  return (
-    <a
-      href={telHref(company.mobile)}
-      className={`flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-navy font-bold text-white hover:bg-navy-dark ${className}`}
-    >
-      <FaPhone className="h-4 w-4" />
-      {label ?? company.mobile}
-    </a>
-  );
-}
-
-function LineButton({ className = "", label = "LINEで相談する" }) {
-  return (
-    <a
-      href={company.lineUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-line-green font-bold text-white hover:opacity-90 ${className}`}
-    >
-      <FaLine className="h-5 w-5" />
-      {label}
-    </a>
-  );
-}
-
-// 補足情報は閉じておき、押したときだけ開く
-function More({ label = "詳しく見る", children, className = "" }) {
-  return (
-    <details className={`group ${className}`}>
-      <summary className="inline-flex cursor-pointer list-none items-center gap-2 border-b-2 border-current pb-0.5 text-sm font-bold [&::-webkit-details-marker]:hidden">
-        <span className="group-open:hidden">{label}</span>
-        <span className="hidden group-open:inline">閉じる</span>
-        <span aria-hidden="true" className="text-base leading-none transition-transform group-open:rotate-45">
-          ＋
-        </span>
-      </summary>
-      <div className="mt-5">{children}</div>
-    </details>
-  );
-}
-
-function CtaStrip({ lead }) {
-  return (
-    <section className="border-y border-line bg-paper">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 md:flex-row md:items-center md:justify-between md:px-6">
-        <div>
-          <p className="text-lg font-black text-navy-dark">{lead}</p>
-          <p className="text-sm text-muted">お見積り・ご相談は無料です（受付 {company.hours}）</p>
-        </div>
-        <div className="grid gap-2 sm:grid-cols-2 md:w-[26rem]">
-          <LineButton className="py-3.5" label="LINEで無料見積り" />
-          <PhoneButton className="py-3.5" label="電話する" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Header() {
-  return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:h-20 md:px-6">
-        <a href="#top" className="flex items-center gap-2 text-navy">
-          <Logo className="h-8 w-11 md:h-9 md:w-12" />
-          <span className="whitespace-nowrap leading-none">
-            <span className="block text-xl font-black tracking-wide text-navy-dark md:text-2xl">
-              Up draft
-            </span>
-            <span className="mt-1 block text-[10px] font-bold text-muted md:text-xs">
-              追い焚き配管クリーニング
-            </span>
-          </span>
-        </a>
-        <nav className="hidden items-center gap-5 whitespace-nowrap text-sm font-bold text-ink xl:flex">
-          {nav.map((item) => (
-            <a key={item.href} href={item.href} className="hover:text-navy">
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2">
-          <LineButton className="hidden px-5 py-2.5 text-sm md:flex" label="LINEで相談" />
-          <PhoneButton className="hidden px-5 py-2.5 text-sm md:flex" />
-          <a href="#contact" className="rounded-md bg-navy px-4 py-2 text-sm font-bold text-white md:hidden">
-            お問い合わせ
-          </a>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 function Hero({ campaignActive }) {
   const facts = [
@@ -427,6 +328,13 @@ function Cases() {
         </ul>
       </More>
       <p className="mt-4 text-sm text-muted">写真はすべて薬品C（配管内部の汚れ洗浄）の工程です。</p>
+      <Link
+        href="/works"
+        className="mt-8 flex items-center justify-between rounded-md border-2 border-navy px-5 py-4 font-black text-navy hover:bg-sky"
+      >
+        大阪府内の施工実績を見る
+        <span aria-hidden="true">→</span>
+      </Link>
     </section>
   );
 }
@@ -434,7 +342,7 @@ function Cases() {
 function Price({ campaignActive }) {
   const rows = [
     ["料金", `${yen(price.regular)}円（税込）`],
-    ["出張費", "大阪市内は料金に含みます（市外はご相談ください）"],
+    ["出張費", "大阪府内は料金に含みます（交通費込み）"],
     ["作業時間", "約2時間"],
     ["対応エリア", company.area],
     ["お支払い", company.payment],
@@ -626,28 +534,6 @@ function Company() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="bg-navy-dark pb-24 pt-10 text-white/80 md:pb-10">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 md:flex-row md:items-center md:justify-between md:px-6">
-        <div className="flex items-center gap-2 text-white">
-          <Logo className="h-7 w-10" />
-          <span className="text-lg font-black">{company.name}</span>
-        </div>
-        <p className="text-xs">© {new Date().getFullYear()} 有限会社 Up draft</p>
-      </div>
-    </footer>
-  );
-}
-
-function MobileCallBar() {
-  return (
-    <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-line bg-white p-2 md:hidden">
-      <PhoneButton className="py-3" label="電話する" />
-      <LineButton className="py-3" label="LINEで相談" />
-    </div>
-  );
-}
 
 export default function Home() {
   const campaignActive = isCampaignActive();

@@ -11,7 +11,7 @@ const notoSansJP = Noto_Sans_JP({
 const SITE_URL = "https://up-draft-official.jp";
 const TITLE = "大阪の追い焚き配管クリーニング｜有限会社Up draft";
 const DESCRIPTION =
-  "大阪府内全域対応の追い焚き配管クリーニング。マイクロバブル発生機と4種類の薬品で、お風呂の配管にたまった汚れを約2時間で洗浄します。全工程でpH値を確認。大阪市内は出張費込み、お見積り・ご相談は無料。LINE・お電話でどうぞ。";
+  "大阪府内全域対応の追い焚き配管クリーニング。マイクロバブル発生機と4種類の薬品で、お風呂の配管にたまった汚れを約2時間で洗浄します。全工程でpH値を確認。大阪府内は交通費込み、お見積り・ご相談は無料。LINE・お電話でどうぞ。";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
