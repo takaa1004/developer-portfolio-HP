@@ -7,6 +7,7 @@ import {
   company,
   faqs,
   families,
+  glossary,
   isCampaignActive,
   price,
   process,
@@ -230,7 +231,7 @@ function Process() {
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
         <SectionHeading eyebrow="作業工程">7つの工程で洗浄します</SectionHeading>
         <p className="mt-4 text-center font-bold text-brand-teal">
-          マイクロバブル発生機と4種類の薬品を使い、全工程でpH値を確認します
+          マイクロバブル発生機（細かい泡を出す機械）と4種類の薬品を使い、全工程でpH値を確認します
         </p>
         <ol className="mx-auto mt-10 grid max-w-4xl gap-px overflow-hidden rounded-md border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {process.map((p, i) => (
@@ -260,7 +261,17 @@ function Process() {
             </li>
           ))}
         </ul>
-        <More className="mx-auto mt-8 block max-w-4xl text-navy" label="各工程の説明を見る">
+        <More className="mx-auto mt-8 block max-w-4xl text-navy" label="むずかしい言葉の説明を見る">
+          <dl className="divide-y divide-line border-y border-line bg-white text-[15px]">
+            {glossary.map(([term, desc]) => (
+              <div key={term} className="grid gap-1 px-4 py-3 md:grid-cols-[11rem_1fr] md:gap-4">
+                <dt className="font-bold text-navy-dark">{term}</dt>
+                <dd className="text-ink">{desc}</dd>
+              </div>
+            ))}
+          </dl>
+        </More>
+        <More className="mx-auto mt-4 block max-w-4xl text-navy" label="各工程の説明を見る">
           <ol className="divide-y divide-line border-y border-line bg-white">
             {process.map((p, i) => (
               <li key={p.title} className="flex gap-4 px-4 py-3">
@@ -289,12 +300,13 @@ function Cases() {
             muted
             loop
             playsInline
+            controls
             preload="metadata"
             aria-label="配管洗浄中に浴槽へ出てきた汚れをすくい取る様子の動画"
             className="aspect-[9/16] w-full object-cover"
           >
-            <source src="/updraft/case-video.webm" type="video/webm" />
             <source src="/updraft/case-video.mp4" type="video/mp4" />
+            <source src="/updraft/case-video.webm" type="video/webm" />
           </video>
         </figure>
         <div>
@@ -374,9 +386,9 @@ function Price({ campaignActive }) {
         )}
         <More className="mt-6 text-navy" label="ご依頼の前にご確認ください">
           <ul className="list-disc space-y-1.5 pl-5 text-[15px] text-ink">
-            <li>追い焚き機能のないお風呂（給水だけで循環しないタイプ）、2つ穴タイプ、ヒノキの浴槽は対応できません。</li>
-            <li>ご自宅のお風呂の品番をご確認ください。</li>
-            <li>エコキュートの場合は、お湯が残っているかをご確認ください。</li>
+            <li>追い焚き機能のないお風呂（給水だけで循環しないタイプ）、2つ穴タイプ（吸い込み口が上下2つある古い型）、ヒノキの浴槽は対応できません。</li>
+            <li>ご自宅のお風呂の品番（給湯器のリモコンや本体に書かれた型番）をご確認ください。</li>
+            <li>エコキュート（電気でお湯をわかしてタンクにためる給湯器）の場合は、お湯が残っているかをご確認ください。</li>
           </ul>
         </More>
       </div>
