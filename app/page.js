@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaInstagram, FaLine, FaPhone } from "react-icons/fa6";
 import {
+  biofilmProblems,
   causes,
   company,
   faqs,
@@ -121,10 +122,7 @@ function About() {
             「バイオフィルム」が張りつきます
           </p>
           <p className="mt-3">菌が集まってできる、ぬめりの膜です。ふだんのお掃除では落とせません。</p>
-          <More className="mt-6 text-navy" label="くわしく見る">
-            <p className="mb-4 text-[15px] text-ink">
-              バイオフィルムの中の菌は、ぬめりに守られているため洗剤が届きにくくなります。はがれた汚れがお湯に混ざると、浮いてくるカスや臭いの原因になります。
-            </p>
+          <More className="mt-6 text-navy" label="汚れがたまる理由を見る">
             <ol className="divide-y divide-line border-y border-line">
               {causes.map((c, i) => (
                 <li key={c.title} className="flex gap-4 py-4">
@@ -165,9 +163,33 @@ function Checklist() {
             </li>
           ))}
         </ul>
-        <p className="mt-6 text-lg font-black">
-          それは、配管にバイオフィルムがたまっているサインかもしれません。
+        <p className="mt-6 text-lg font-black md:text-xl">
+          それは、配管に
+          <span className="text-brand-yellow">バイオフィルム</span>
+          がたまっているサインかもしれません。
         </p>
+        <div className="mt-6 rounded-md bg-white p-5 text-ink md:p-7">
+          <p className="font-black text-navy-dark">バイオフィルムを放っておくと</p>
+          <ul className="mt-4 grid gap-4 md:grid-cols-3">
+            {biofilmProblems.map((b, i) => (
+              <li key={b.title} className="flex gap-3">
+                <span className="font-black text-brand-red">{i + 1}</span>
+                <div>
+                  <p className="font-bold text-navy-dark">{b.title}</p>
+                  <p className="text-[15px]">{b.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6 border-t border-line pt-5">
+            <p className="font-bold text-navy-dark">気になったら、写真を送ってご相談ください。</p>
+            <p className="text-sm text-muted">お見積り・ご相談は無料です（受付 {company.hours}）</p>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2 md:max-w-lg">
+              <LineButton className="py-3.5" label="LINEで無料相談" />
+              <PhoneButton className="py-3.5" label="電話で相談する" />
+            </div>
+          </div>
+        </div>
         <div className="mt-8 border-t border-white/30 pt-6">
           <p className="font-bold text-white/80">こんなご家庭は、特にたまりやすくなります</p>
           <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
@@ -584,7 +606,6 @@ export default function Home() {
         <About />
         <Checklist />
         <Families />
-        <CtaStrip lead="気になったら、まずはご相談ください" />
         <Reasons />
         <Process />
         <Cases />
