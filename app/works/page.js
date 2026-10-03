@@ -26,7 +26,7 @@ export default function WorksPage() {
             </p>
             <h1 className="mt-3 text-3xl font-black text-navy-dark md:text-4xl">施工例</h1>
             <p className="mt-3 text-ink">
-              大阪府内で行った追い焚き配管クリーニングの中から、一部をご紹介します。写真はすべて、実際に配管から出てきた汚れです。
+              ハウスクリーニング歴5年、施工実績多数。大阪府内で行った追い焚き配管クリーニングの中から、一部をご紹介します。写真はすべて、実際に配管から出てきた汚れです。
             </p>
           </div>
         </section>

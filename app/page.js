@@ -64,6 +64,14 @@ function Hero({ campaignActive }) {
             <span className="whitespace-nowrap">きれいに。</span>
           </h1>
           <p className="mt-4 text-ink">小さいお子さまやご高齢の方がいるご家庭こそ、年に1回の配管洗浄を。</p>
+          <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm font-bold text-navy">
+            {["ハウスクリーニング歴5年", "施工実績多数", "損害保険加入"].map((t) => (
+              <li key={t} className="flex items-center gap-1.5">
+                <CheckIcon className="h-4 w-4 text-brand-teal" />
+                {t}
+              </li>
+            ))}
+          </ul>
           <dl className="mt-6 flex max-w-md divide-x divide-navy/20 border-y border-navy/20">
             {facts.map(([k, v]) => (
               <div key={k} className="flex-1 py-3 text-center">
@@ -578,6 +586,7 @@ function Company() {
   const rows = [
     ["会社名", company.name],
     ["代表者", `${company.representativeTitle}　${company.representative}`],
+    ["実績", "ハウスクリーニング歴5年・施工実績多数"],
     ...company.offices.map((o) => [o.label, `${o.zip}　${o.address}`]),
     ["TEL / FAX", `${company.tel} / ${company.fax}`],
     ["携帯", company.mobile],
@@ -589,9 +598,9 @@ function Company() {
   return (
     <section id="company" className="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-20">
       <SectionHeading eyebrow="会社概要">{company.name}</SectionHeading>
-      <CompanyRows rows={rows.slice(0, 4)} className="mt-8" />
+      <CompanyRows rows={rows.slice(0, 5)} className="mt-8" />
       <More className="mt-5 text-navy" label="連絡先・その他を見る">
-        <CompanyRows rows={rows.slice(4)} />
+        <CompanyRows rows={rows.slice(5)} />
       </More>
     </section>
   );
