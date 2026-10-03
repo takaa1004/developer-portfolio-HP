@@ -65,7 +65,7 @@ function Hero({ campaignActive }) {
           </h1>
           <p className="mt-4 text-ink">小さいお子さまやご高齢の方がいるご家庭こそ、年に1回の配管洗浄を。</p>
           <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm font-bold text-navy">
-            {["ハウスクリーニング歴5年", "施工実績多数", "損害保険加入"].map((t) => (
+            {["ハウスクリーニング・お風呂・配管洗浄を通算5年", "施工実績多数", "損害保険加入"].map((t) => (
               <li key={t} className="flex items-center gap-1.5">
                 <CheckIcon className="h-4 w-4 text-brand-teal" />
                 {t}
@@ -586,7 +586,7 @@ function Company() {
   const rows = [
     ["会社名", company.name],
     ["代表者", `${company.representativeTitle}　${company.representative}`],
-    ["実績", "ハウスクリーニング歴5年・施工実績多数"],
+    ["実績", "ハウスクリーニング・お風呂洗浄・配管洗浄を通算5年、施工実績多数"],
     ...company.offices.map((o) => [o.label, `${o.zip}　${o.address}`]),
     ["TEL / FAX", `${company.tel} / ${company.fax}`],
     ["携帯", company.mobile],
