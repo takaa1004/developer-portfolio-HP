@@ -112,7 +112,7 @@ function About() {
       <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-center">
         <div className="grid grid-cols-2 gap-2">
           {["/updraft/case-scoop-2.webp", "/updraft/case-green.webp"].map((src) => (
-            <figure key={src} className="relative aspect-square overflow-hidden rounded-md">
+            <figure key={src} className="relative aspect-square overflow-hidden rounded-md bg-sky-deep/40">
               <Image
                 src={src}
                 alt="追い焚き配管の洗浄中に浴槽へ出てきた汚れ"
@@ -304,7 +304,7 @@ function Process() {
         <ul className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-2 md:grid-cols-4">
           {photos.map((p) => (
             <li key={p.photo}>
-              <figure className="relative aspect-[3/4] overflow-hidden rounded-md">
+              <figure className="relative aspect-[3/4] overflow-hidden rounded-md bg-sky-deep/40">
                 <Image src={p.photo} alt={p.photoAlt} fill sizes="(min-width: 768px) 220px, 45vw" className="object-cover" />
                 <figcaption className="absolute inset-x-0 bottom-0 bg-navy-dark/80 px-2 py-1 text-xs font-bold text-white">
                   {p.title}（{p.tag}）
@@ -372,7 +372,7 @@ function Cases() {
       </div>
       <ul className="mt-10 grid grid-cols-2 gap-2 md:grid-cols-4">
         {gallery.slice(0, 4).map((g) => (
-          <li key={g.src} className="relative aspect-square overflow-hidden rounded-md">
+          <li key={g.src} className="relative aspect-square overflow-hidden rounded-md bg-sky-deep/40">
             <Image src={g.src} alt={g.alt} fill sizes="(min-width: 768px) 280px, 50vw" className="object-cover" />
           </li>
         ))}
@@ -380,7 +380,7 @@ function Cases() {
       <More className="mt-5 text-navy" label="写真をもっと見る">
         <ul className="grid grid-cols-2 gap-2 md:grid-cols-4">
           {gallery.slice(4).map((g) => (
-            <li key={g.src} className="relative aspect-square overflow-hidden rounded-md">
+            <li key={g.src} className="relative aspect-square overflow-hidden rounded-md bg-sky-deep/40">
               <Image src={g.src} alt={g.alt} fill sizes="(min-width: 768px) 280px, 50vw" className="object-cover" />
             </li>
           ))}

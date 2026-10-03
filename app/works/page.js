@@ -41,7 +41,7 @@ export default function WorksPage() {
           <ul className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {works.map((w) => (
               <li key={`${w.date}-${w.area}`}>
-                <figure className="relative aspect-[4/3] overflow-hidden rounded-md bg-paper">
+                <figure className="relative aspect-[4/3] overflow-hidden rounded-md bg-sky-deep/40">
                   <Image
                     src={w.photo}
                     alt={w.alt}
