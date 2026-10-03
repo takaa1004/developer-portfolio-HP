@@ -5,9 +5,9 @@ import { CtaStrip, Footer, Header, MobileCallBar } from "../_updraft/site";
 import { SectionHeading } from "../_updraft/ui";
 
 export const metadata = {
-  title: "施工実績｜大阪の追い焚き配管クリーニング｜有限会社Up draft",
+  title: "施工例｜大阪の追い焚き配管クリーニング｜有限会社Up draft",
   description:
-    "大阪府内で行った追い焚き配管クリーニングの施工実績です。実際に配管から出てきた汚れの写真を、時期と地域ごとに掲載しています。",
+    "大阪府内で行った追い焚き配管クリーニングの施工例です。実際に配管から出てきた汚れの写真を、時期と地域ごとに掲載しています。",
   alternates: { canonical: "/works" },
 };
 
@@ -22,11 +22,11 @@ export default function WorksPage() {
               <Link href="/" className="underline underline-offset-4">
                 トップ
               </Link>
-              　›　施工実績
+              　›　施工例
             </p>
-            <h1 className="mt-3 text-3xl font-black text-navy-dark md:text-4xl">施工実績</h1>
+            <h1 className="mt-3 text-3xl font-black text-navy-dark md:text-4xl">施工例</h1>
             <p className="mt-3 text-ink">
-              大阪府内で行った追い焚き配管クリーニングの記録です。写真はすべて、実際に配管から出てきた汚れです。
+              大阪府内で行った追い焚き配管クリーニングの中から、一部をご紹介します。写真はすべて、実際に配管から出てきた汚れです。
             </p>
           </div>
         </section>
@@ -37,7 +37,7 @@ export default function WorksPage() {
               確認用：時期と地域は仮の内容です。公開前に実際の記録に差し替えます。
             </p>
           )}
-          <SectionHeading eyebrow="大阪府内の施工実績">{works.length}件の施工記録</SectionHeading>
+          <SectionHeading eyebrow="大阪府内の施工例">汚れの様子は、お宅ごとにちがいます</SectionHeading>
           <ul className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {works.map((w) => (
               <li key={`${w.date}-${w.area}`}>

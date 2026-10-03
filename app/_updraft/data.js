@@ -238,7 +238,7 @@ export const faqs = [
   },
 ];
 
-// 施工実績（大阪府内）
+// 施工例（大阪府内）
 // TODO: 時期・地域は確認用の仮データ。公開前に実際の施工記録に差し替えて、WORKS_ARE_SAMPLE を false にする
 export const WORKS_ARE_SAMPLE = true;
 

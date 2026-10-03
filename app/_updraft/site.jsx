@@ -7,7 +7,7 @@ import { Logo } from "./ui";
 export const nav = [
   { href: "/#about", label: "配管の汚れ" },
   { href: "/#process", label: "作業工程" },
-  { href: "/works", label: "施工実績" },
+  { href: "/works", label: "施工例" },
   { href: "/#price", label: "料金" },
   { href: "/#faq", label: "よくある質問" },
   { href: "/#company", label: "会社概要" },

@@ -344,7 +344,7 @@ function Cases() {
         href="/works"
         className="mt-8 flex items-center justify-between rounded-md border-2 border-navy px-5 py-4 font-black text-navy hover:bg-sky"
       >
-        大阪府内の施工実績を見る
+        大阪府内の施工例を見る
         <span aria-hidden="true">→</span>
       </Link>
     </section>
