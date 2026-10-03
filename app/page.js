@@ -3,7 +3,6 @@ import Link from "next/link";
 import { FaInstagram, FaLine, FaPhone } from "react-icons/fa6";
 import {
   causes,
-  checklist,
   company,
   faqs,
   families,
@@ -12,6 +11,8 @@ import {
   price,
   process,
   reasons,
+  riskHabits,
+  signs,
   steps,
   telHref,
 } from "./_updraft/data";
@@ -149,19 +150,35 @@ function About() {
 function Checklist() {
   return (
     <section className="bg-navy text-white">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-14 md:px-6 md:py-16 lg:grid-cols-[1fr_1.4fr]">
-        <div>
-          <p className="text-sm font-bold text-white/70">こんな方におすすめです</p>
-          <h2 className="mt-2 text-2xl font-black leading-snug md:text-4xl">こんなことはありませんか？</h2>
-        </div>
-        <ul className="grid gap-x-8 sm:grid-cols-2">
-          {checklist.map((item) => (
-            <li key={item.title} className="flex items-start gap-3 border-b border-white/15 py-3.5">
+      <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-16">
+        <p className="text-sm font-bold text-white/70">お掃除のサイン</p>
+        <h2 className="mt-2 text-2xl font-black leading-snug md:text-4xl">
+          入浴中にこんなこと、
+          <br className="md:hidden" />
+          ありませんか？
+        </h2>
+        <ul className="mt-6 grid gap-x-8 sm:grid-cols-2">
+          {signs.map((t) => (
+            <li key={t} className="flex items-start gap-3 border-b border-white/15 py-3.5">
               <CheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-brand-yellow" />
-              <span className="font-bold">{item.title}</span>
+              <span className="font-bold">{t}</span>
             </li>
           ))}
         </ul>
+        <p className="mt-6 text-lg font-black">
+          それは、配管にバイオフィルムがたまっているサインかもしれません。
+        </p>
+        <div className="mt-8 border-t border-white/30 pt-6">
+          <p className="font-bold text-white/80">こんなご家庭は、特にたまりやすくなります</p>
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-[15px]">
+            {riskHabits.map((t) => (
+              <li key={t} className="flex gap-2">
+                <span aria-hidden="true" className="text-brand-yellow">・</span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
