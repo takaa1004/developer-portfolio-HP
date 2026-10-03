@@ -182,8 +182,10 @@ function Checklist() {
             ))}
           </ul>
           <div className="mt-6 border-t border-line pt-5">
-            <p className="font-bold text-navy-dark">気になったら、写真を送ってご相談ください。</p>
-            <p className="text-sm text-muted">お見積り・ご相談は無料です（受付 {company.hours}）</p>
+            <p className="font-bold text-navy-dark">気になったら、お気軽にご相談ください。</p>
+            <p className="text-sm text-muted">
+              お見積り・ご相談は無料です（受付 {company.hours}）。LINEならお風呂の写真を送るだけでOKです。
+            </p>
             <div className="mt-3 grid gap-2 sm:grid-cols-2 md:max-w-lg">
               <LineButton className="py-3.5" label="LINEで無料相談" />
               <PhoneButton className="py-3.5" label="電話で相談する" />
