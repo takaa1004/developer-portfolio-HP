@@ -115,12 +115,15 @@ function About() {
         </div>
         <div>
           <p className="text-xl font-black leading-relaxed text-navy-dark">
-            見た目がきれいなお風呂でも、
+            配管の内側には
             <br />
-            配管の中はこの状態です。
+            「バイオフィルム」が張りつきます
           </p>
-          <p className="mt-3">毎日のお湯は、この配管を通って浴槽に届いています。</p>
-          <More className="mt-6 text-navy" label="汚れがたまる理由を見る">
+          <p className="mt-3">菌が集まってできる、ぬめりの膜です。ふだんのお掃除では落とせません。</p>
+          <More className="mt-6 text-navy" label="くわしく見る">
+            <p className="mb-4 text-[15px] text-ink">
+              バイオフィルムの中の菌は、ぬめりに守られているため洗剤が届きにくくなります。はがれた汚れがお湯に混ざると、浮いてくるカスや臭いの原因になります。
+            </p>
             <ol className="divide-y divide-line border-y border-line">
               {causes.map((c, i) => (
                 <li key={c.title} className="flex gap-4 py-4">
@@ -150,7 +153,6 @@ function Checklist() {
         <div>
           <p className="text-sm font-bold text-white/70">こんな方におすすめです</p>
           <h2 className="mt-2 text-2xl font-black leading-snug md:text-4xl">こんなことはありませんか？</h2>
-          <p className="mt-3 text-white/80">ひとつでも当てはまれば、お手入れどきです。</p>
         </div>
         <ul className="grid gap-x-8 sm:grid-cols-2">
           {checklist.map((item) => (
@@ -231,7 +233,7 @@ function Process() {
       <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-20">
         <SectionHeading eyebrow="作業工程">7つの工程で洗浄します</SectionHeading>
         <p className="mt-4 text-center font-bold text-brand-teal">
-          マイクロバブル発生機（細かい泡を出す機械）と4種類の薬品を使い、全工程でpH値を確認します
+          マイクロバブルと4種類の薬品で洗浄し、全工程でpH値を確認します
         </p>
         <ol className="mx-auto mt-10 grid max-w-4xl gap-px overflow-hidden rounded-md border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {process.map((p, i) => (
@@ -339,7 +341,6 @@ function Cases() {
           ))}
         </ul>
       </More>
-      <p className="mt-4 text-sm text-muted">写真はすべて薬品C（配管内部の汚れ洗浄）の工程です。</p>
       <Link
         href="/works"
         className="mt-8 flex items-center justify-between rounded-md border-2 border-navy px-5 py-4 font-black text-navy hover:bg-sky"
@@ -416,24 +417,33 @@ function Faq() {
   return (
     <section id="faq" className="mx-auto max-w-3xl px-4 pb-16 md:px-6 md:pb-20">
       <SectionHeading eyebrow="FAQ">よくあるご質問</SectionHeading>
-      <div className="mt-10 divide-y divide-line border-y border-line">
-        {faqs.map((f) => (
-          <details key={f.q} className="group">
-            <summary className="flex cursor-pointer list-none items-start gap-3 py-4 font-bold text-navy-dark [&::-webkit-details-marker]:hidden">
-              <span className="font-black text-navy">Q</span>
-              <span className="flex-1">{f.q}</span>
-              <span aria-hidden="true" className="text-xl leading-none text-navy transition-transform group-open:rotate-45">
-                ＋
-              </span>
-            </summary>
-            <div className="flex gap-3 pb-5">
-              <span className="font-black text-brand-red">A</span>
-              <p className="flex-1 leading-relaxed">{f.a}</p>
-            </div>
-          </details>
-        ))}
-      </div>
+      <FaqList items={faqs.slice(0, 5)} className="mt-10" />
+      <More className="mt-5 text-navy" label="ほかの質問を見る">
+        <FaqList items={faqs.slice(5)} />
+      </More>
     </section>
+  );
+}
+
+function FaqList({ items, className = "" }) {
+  return (
+    <div className={`divide-y divide-line border-y border-line text-ink ${className}`}>
+      {items.map((f) => (
+        <details key={f.q} className="group">
+          <summary className="flex cursor-pointer list-none items-start gap-3 py-4 font-bold text-navy-dark [&::-webkit-details-marker]:hidden">
+            <span className="font-black text-navy">Q</span>
+            <span className="flex-1">{f.q}</span>
+            <span aria-hidden="true" className="text-xl leading-none text-navy transition-transform group-open:rotate-45">
+              ＋
+            </span>
+          </summary>
+          <div className="flex gap-3 pb-5">
+            <span className="font-black text-brand-red">A</span>
+            <p className="flex-1 leading-relaxed">{f.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
   );
 }
 
@@ -466,7 +476,7 @@ function Contact() {
         <div className="flex items-center gap-5">
           <div className="flex-1">
             <h2 className="text-2xl font-black leading-snug md:text-4xl">「まずは相談だけ」でも大丈夫です。</h2>
-            <p className="mt-2 text-white/80">お見積り・ご相談は無料です。お風呂の写真をLINEで送っていただくとスムーズです。</p>
+            <p className="mt-2 text-white/80">お見積り・ご相談は無料。お風呂の写真をLINEで送るとスムーズです。</p>
           </div>
           <LineChatIllust className="h-28 w-auto shrink-0 md:h-36" />
         </div>
