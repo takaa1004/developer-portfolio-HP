@@ -76,7 +76,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:h-20 md:px-6">
-        <Link href="/" className="flex items-center gap-2 text-navy">
+        <Link prefetch={false} href="/" className="flex items-center gap-2 text-navy">
           <Logo className="h-8 w-11 md:h-9 md:w-12" />
           <span className="whitespace-nowrap leading-none">
             <span className="block text-xl font-black tracking-wide text-navy-dark md:text-2xl">
@@ -89,7 +89,7 @@ export function Header() {
         </Link>
         <nav className="hidden items-center gap-5 whitespace-nowrap text-sm font-bold text-ink xl:flex">
           {nav.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-navy">
+            <Link prefetch={false} key={item.href} href={item.href} className="hover:text-navy">
               {item.label}
             </Link>
           ))}
@@ -97,7 +97,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <LineButton className="hidden px-5 py-2.5 text-sm md:flex" label="LINEで相談" />
           <PhoneButton className="hidden px-5 py-2.5 text-sm md:flex" />
-          <Link href="/#contact" className="rounded-md bg-navy px-4 py-2 text-sm font-bold text-white md:hidden">
+          <Link prefetch={false} href="/#contact" className="rounded-md bg-navy px-4 py-2 text-sm font-bold text-white md:hidden">
             お問い合わせ
           </Link>
         </div>

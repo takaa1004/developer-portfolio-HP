@@ -19,7 +19,7 @@ export default function WorksPage() {
         <section className="bg-sky">
           <div className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
             <p className="text-sm font-bold text-navy">
-              <Link href="/" className="underline underline-offset-4">
+              <Link prefetch={false} href="/" className="underline underline-offset-4">
                 トップ
               </Link>
               　›　施工例

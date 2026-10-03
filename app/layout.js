@@ -1,12 +1,5 @@
 import { GoogleTagManager } from "@next/third-parties/google";
-import { Noto_Sans_JP } from "next/font/google";
 import "./updraft.css";
-
-const notoSansJP = Noto_Sans_JP({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
-  display: "swap",
-});
 
 const SITE_URL = "https://up-draft-official.jp";
 const TITLE = "大阪の追い焚き配管クリーニング｜有限会社Up draft";
@@ -25,7 +18,7 @@ export const metadata = {
     siteName: "有限会社Up draft",
     title: TITLE,
     description: DESCRIPTION,
-    images: [{ url: "/updraft/case-foam-wide.jpg", width: 1400, height: 1050 }],
+    images: [{ url: "/og.jpg", width: 1200, height: 630 }],
   },
   twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
@@ -37,7 +30,7 @@ const jsonLd = {
   name: "有限会社Up draft",
   description: DESCRIPTION,
   url: SITE_URL,
-  image: `${SITE_URL}/updraft/case-foam-wide.jpg`,
+  image: `${SITE_URL}/og.jpg`,
   telephone: "+81-80-7574-4875",
   email: "y.asamura@up-draft-official.jp",
   priceRange: "¥25,000",
@@ -66,14 +59,14 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
-      <body className={notoSansJP.className}>
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
       </body>
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
+      {process.env.NEXT_PUBLIC_GTM && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />}
     </html>
   );
 }

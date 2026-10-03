@@ -25,6 +25,7 @@ import {
   SectionHeading,
   SeniorBathIllust,
 } from "./_updraft/ui";
+import LazyVideo from "./_updraft/lazy-video";
 import { CtaStrip, Footer, Header, LineButton, MobileCallBar, More, PhoneButton } from "./_updraft/site";
 
 // キャンペーン終了日を過ぎたら表示を切り替えるため、1時間ごとに再生成する
@@ -33,13 +34,13 @@ export const revalidate = 3600;
 const yen = (n) => n.toLocaleString("ja-JP");
 
 const gallery = [
-  { src: "/updraft/case-foam-wide.jpg", alt: "浴槽いっぱいに広がった配管からの汚れ" },
-  { src: "/updraft/case-scoop-1.jpg", alt: "浴槽に出てきた汚れをすくい取る作業" },
-  { src: "/updraft/case-yellow.jpg", alt: "配管から押し出された黄土色の汚れ" },
-  { src: "/updraft/case-port.jpg", alt: "循環口まわりに集まった汚れ" },
-  { src: "/updraft/case-scoop-3.jpg", alt: "泡立った汚れを取り除く作業" },
-  { src: "/updraft/case-ladle.jpg", alt: "洗浄中の浴槽と、汚れをすくうひしゃく" },
-  { src: "/updraft/case-sludge.jpg", alt: "かたまりになった汚れを取り除く様子" },
+  { src: "/updraft/case-foam-wide.webp", alt: "浴槽いっぱいに広がった配管からの汚れ" },
+  { src: "/updraft/case-scoop-1.webp", alt: "浴槽に出てきた汚れをすくい取る作業" },
+  { src: "/updraft/case-yellow.webp", alt: "配管から押し出された黄土色の汚れ" },
+  { src: "/updraft/case-port.webp", alt: "循環口まわりに集まった汚れ" },
+  { src: "/updraft/case-scoop-3.webp", alt: "泡立った汚れを取り除く作業" },
+  { src: "/updraft/case-ladle.webp", alt: "洗浄中の浴槽と、汚れをすくうひしゃく" },
+  { src: "/updraft/case-sludge.webp", alt: "かたまりになった汚れを取り除く様子" },
 ];
 
 
@@ -110,7 +111,7 @@ function About() {
       </SectionHeading>
       <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-center">
         <div className="grid grid-cols-2 gap-2">
-          {["/updraft/case-scoop-2.jpg", "/updraft/case-green.jpg"].map((src) => (
+          {["/updraft/case-scoop-2.webp", "/updraft/case-green.webp"].map((src) => (
             <figure key={src} className="relative aspect-square overflow-hidden rounded-md">
               <Image
                 src={src}
@@ -345,20 +346,15 @@ function Cases() {
       <SectionHeading eyebrow="作業の様子">実際の現場の写真と動画</SectionHeading>
       <div className="mt-10 grid gap-8 md:grid-cols-[minmax(0,280px)_1fr] md:items-center lg:gap-14">
         <figure className="mx-auto w-full max-w-[280px] overflow-hidden rounded-md bg-navy-dark">
-          <video
+          <LazyVideo
             poster="/updraft/case-video-poster.jpg"
-            autoPlay
-            muted
-            loop
-            playsInline
-            controls
-            preload="metadata"
-            aria-label="配管洗浄中に浴槽へ出てきた汚れをすくい取る様子の動画"
+            label="配管洗浄中に浴槽へ出てきた汚れをすくい取る様子の動画"
             className="aspect-[9/16] w-full object-cover"
-          >
-            <source src="/updraft/case-video.mp4" type="video/mp4" />
-            <source src="/updraft/case-video.webm" type="video/webm" />
-          </video>
+            sources={[
+              { src: "/updraft/case-video.mp4", type: "video/mp4" },
+              { src: "/updraft/case-video.webm", type: "video/webm" },
+            ]}
+          />
         </figure>
         <div>
           <h3 className="text-xl font-black leading-snug text-navy-dark md:text-2xl">
@@ -390,7 +386,7 @@ function Cases() {
           ))}
         </ul>
       </More>
-      <Link
+      <Link prefetch={false}
         href="/works"
         className="mt-8 flex items-center justify-between rounded-md border-2 border-navy px-5 py-4 font-black text-navy hover:bg-sky"
       >

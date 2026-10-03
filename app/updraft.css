@@ -1,9 +1,14 @@
-@import "tailwindcss";
+/* このサイトのファイルだけを読み取って、必要なスタイルだけを書き出す */
+@import "tailwindcss" source(none);
+@source "./page.js";
+@source "./works";
+@source "./_updraft";
+@source "./not-found.jsx";
 
 @theme {
   --color-navy: #0f3a8a;
   --color-navy-dark: #0b1f44;
-  --color-brand-red: #e0452b;
+  --color-brand-red: #c23a24;
   --color-brand-red-soft: #fdf3f0;
   --color-brand-teal: #1b6e62;
   --color-brand-teal-soft: #eef6f4;
@@ -15,7 +20,7 @@
   --color-sky: #eaf3fb;
   --color-sky-deep: #cfe3f5;
   --color-cream: #fbf8f2;
-  --color-line-green: #06c755;
+  --color-line-green: #00873c;
 }
 
 html {
@@ -23,7 +28,10 @@ html {
   scroll-padding-top: 5rem;
 }
 
+/* 日本語は端末に入っているフォントを使う（Webフォントを読み込まないので速い） */
 body {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP",
+    "Yu Gothic UI", "YuGothic", "Meiryo", system-ui, sans-serif;
   font-size: 17px;
   line-height: 1.8;
   background: #ffffff;
