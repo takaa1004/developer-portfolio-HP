@@ -65,7 +65,7 @@ function Hero({ campaignActive }) {
           </h1>
           <p className="mt-4 text-ink">小さいお子さまやご高齢の方がいるご家庭こそ、年に1回の配管洗浄を。</p>
           <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm font-bold text-navy">
-            {["家じゅうのお掃除のプロ", "施工実績多数", "損害保険加入"].map((t) => (
+            {["お家のお掃除のプロ", "施工実績多数", "損害保険加入"].map((t) => (
               <li key={t} className="flex items-center gap-1.5">
                 <CheckIcon className="h-4 w-4 text-brand-teal" />
                 {t}
