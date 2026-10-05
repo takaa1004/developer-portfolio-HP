@@ -1,0 +1,222 @@
+:root {
+  --bg: #fafaf8;
+  --surface: #ffffff;
+  --text: #1d1f23;
+  --muted: #5f6672;
+  --line: #e4e4df;
+  --accent: #0b5fff;
+  --accent-text: #ffffff;
+  --note-bg: #f1f4fb;
+  --warn-bg: #fff6e5;
+  --warn-line: #f0d9a8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111317;
+    --surface: #181b20;
+    --text: #e9eaec;
+    --muted: #9aa1ad;
+    --line: #2a2e36;
+    --accent: #6c9bff;
+    --accent-text: #0b1020;
+    --note-bg: #1a2030;
+    --warn-bg: #2a2416;
+    --warn-line: #4b3f1f;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+  line-height: 1.85;
+  font-size: 16px;
+}
+
+a { color: var(--accent); }
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+}
+
+.site-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-left: 16px;
+}
+
+.site-nav a:hover { color: var(--text); }
+
+main { padding: 32px 0 56px; }
+
+h1 {
+  font-size: 1.65rem;
+  line-height: 1.45;
+  margin: 8px 0 16px;
+}
+
+h2 {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin: 48px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--line);
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin: 28px 0 8px;
+}
+
+p { margin: 0 0 1.1em; }
+
+.meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.pr {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-line);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  margin: 0 0 24px;
+}
+
+.note {
+  background: var(--note-bg);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0 0 24px;
+  font-size: 0.95rem;
+}
+
+.note p:last-child { margin-bottom: 0; }
+
+.summary {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 0 0 8px;
+}
+
+.summary ul { margin: 0; padding-left: 1.2em; }
+.summary li { margin: 4px 0; }
+
+.table-scroll {
+  overflow-x: auto;
+  margin: 0 0 24px;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 480px;
+  font-size: 0.92rem;
+  background: var(--surface);
+}
+
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th { background: var(--note-bg); font-weight: 600; white-space: nowrap; }
+
+.cta {
+  display: block;
+  text-align: center;
+  background: var(--accent);
+  color: var(--accent-text);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 14px 16px;
+  border-radius: 10px;
+  margin: 8px 0 8px;
+}
+
+.cta:hover { filter: brightness(1.08); }
+
+.cta-sub {
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 0 0 24px;
+}
+
+.card-list { list-style: none; padding: 0; margin: 24px 0 0; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+.card a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.card a:hover { color: var(--accent); }
+.card p { margin: 6px 0 0; color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
+
+.lead { color: var(--muted); }
+
+.sources { font-size: 0.88rem; color: var(--muted); }
+.sources li { margin: 4px 0; word-break: break-all; }
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  padding: 24px 0 40px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.site-footer a { color: var(--muted); }
+.site-footer p { margin: 0 0 8px; }
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.18rem; }
+}
