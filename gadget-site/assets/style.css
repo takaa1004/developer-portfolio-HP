@@ -220,3 +220,31 @@ th { background: var(--note-bg); font-weight: 600; white-space: nowrap; }
   h1 { font-size: 1.4rem; }
   h2 { font-size: 1.18rem; }
 }
+
+.fig {
+  margin: 8px auto 24px;
+  max-width: 440px;
+}
+
+.fig svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fig figcaption {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+.fig .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.fig .vid { fill: var(--note-bg); stroke: var(--accent); stroke-width: 1.5; }
+.fig .tb  { fill: var(--accent); stroke: var(--accent); stroke-width: 1.5; }
+.fig .ln  { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.fig .hd  { fill: var(--muted); font-size: 12px; font-weight: 700; }
+.fig .tx  { fill: var(--text); font-size: 12px; }
+.fig .tw  { fill: var(--accent-text); font-size: 12px; font-weight: 700; }
+.fig .sm  { fill: var(--muted); font-size: 11px; }
+.fig text { font-family: inherit; }
