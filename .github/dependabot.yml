@@ -1,0 +1,30 @@
+# 依存パッケージの更新を Dependabot に自動で提案させる。
+# - 毎週月曜に、マイナー・パッチ更新を1つのPRにまとめて出す
+# - メジャー更新（壊れる可能性がある大きな更新）は1つずつ別のPRで出す
+# - 脆弱性の修正はこの設定とは別に、GitHub の「Dependabot security updates」が
+#   見つけ次第すぐPRを出す（リポジトリの Settings → Code security で有効化）
+# PRには CI（.github/workflows/ci.yml）が自動で走るので、緑ならマージしてよい。
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: ["minor", "patch"]
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: ["minor", "patch"]
